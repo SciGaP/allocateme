@@ -23,6 +23,11 @@ public class Soup {
         this.page = 1;
     }
 
+    /**
+     * 
+     * @return JSONArray representing publications attributed to a inputted person
+     * @throws IOException 
+     */
     public JSONArray getCitations() throws IOException {
         String pagedUrl = this.url;
         System.out.println(pagedUrl);

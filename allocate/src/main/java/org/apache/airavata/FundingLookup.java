@@ -17,7 +17,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 /**
- *
+ * Queries the National Science Foundation grant database and returns parsed 
+ * data into strings and a JSON object. 
  * @author Peter Dirks
  */
 public class FundingLookup implements Runnable {
@@ -56,7 +57,8 @@ public class FundingLookup implements Runnable {
      * @throws Exception UnsupportedEncodingException on bad URL encode, 
      * @throws MalformedURLException on bad URL object creation
      * @throws IOException on IO create failure
-     * @return JSONObject on success, null on failure
+     * @return JSONObject on success
+     * @return null on failure
      */
     public JSONObject load () throws Exception
     {
@@ -105,10 +107,12 @@ public class FundingLookup implements Runnable {
     }// end load
     
     /**
-     * Parse raw JSON string into JSON object and strings.
+     * Parse raw JSON string into JSON object and strings. If keys in JSON are not found,
+     * strings will be NULL.
      * @param jsonString raw JSON from input reader
      * @throws Exception 
-     * @return JSONObject on success, null on failure
+     * @return JSONObject on success
+     * @return null on failure
      */
     private JSONObject parseFunding( String jsonString ) throws Exception{
         if (jsonString == null || jsonString == "") return null;
@@ -154,14 +158,14 @@ public class FundingLookup implements Runnable {
             try{
                 JSONObject fundingInfo = (JSONObject) doc;
                 
-                agency = (String)fundingInfo.getOrDefault( "agency", "");
-                awardeeName = (String)fundingInfo.getOrDefault( "awardeeName", "");
-                fundsObligatedAmt = (String)fundingInfo.getOrDefault( "fundsObligatedAmt", "");
-                id = (String)fundingInfo.getOrDefault( "id", "");
-                piFirstName = (String)fundingInfo.getOrDefault( "piFirstName", "");
-                piLastName = (String)fundingInfo.getOrDefault( "piLastName", "");
-                date = (String)fundingInfo.getOrDefault( "date", "");        // TODO make into a date object
-                title = (String)fundingInfo.getOrDefault( "title", "");
+                agency = (String)fundingInfo.get( "agency" );
+                awardeeName = (String)fundingInfo.get( "awardeeName" );
+                fundsObligatedAmt = (String)fundingInfo.get( "fundsObligatedAmt" );
+                id = (String)fundingInfo.get( "id" );
+                piFirstName = (String)fundingInfo.get( "piFirstName" );
+                piLastName = (String)fundingInfo.get( "piLastName" );
+                date = (String)fundingInfo.get( "date" );        // TODO make into a date object (?)
+                title = (String)fundingInfo.get( "title" );
                 
             } catch (Exception ex){
                 throw ex;
@@ -182,6 +186,10 @@ public class FundingLookup implements Runnable {
         runner.start();
         return;
     }
+    
+    /**
+     * called on creation of load Parallel
+     */
     public void run(){
         try{
             load();
@@ -191,7 +199,7 @@ public class FundingLookup implements Runnable {
     }
     
     /**
-     * getJSONObj
+     * getJSONObj get response JSONObject 
      * @return JSONObject represents everything found in received API call
      */
     JSONObject getJSONObj(){

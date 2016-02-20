@@ -21,7 +21,7 @@ hs_err_pid*
 # =======================
 # MAVEN gitignores!
 # =======================
-
+.idea
 target/
 pom.xml.tag
 pom.xml.releaseBackup

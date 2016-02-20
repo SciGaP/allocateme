@@ -1,10 +1,10 @@
 /allocate/target/
 
+*.iml
+
 # =======================
 # JAVA gitignores!
 # =======================
-
-#
 *.class
 
 # Mobile Tools for Java (J2ME)

@@ -1,5 +1,6 @@
 package org.apache.airavata;
 
+import com.mongodb.util.JSON;
 import org.bson.Document;
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
@@ -36,6 +37,11 @@ public class MongoWrapper {
                                 .append("name", user.get("name"))
                                 .append("primaryEmail", user.get("primaryEmail")))
         );
+    }
+
+    public void addJSONtoDB(String obj, String collection){
+        DBObject dbObject = (DBObject) JSON.parse(obj);
+        db.getCollection(collection).insert(dbObject);
     }
 
     public void update(JSONObject user){

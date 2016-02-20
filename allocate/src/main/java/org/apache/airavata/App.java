@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
 /**
  * Hello world!
  *
@@ -17,7 +16,7 @@ public class App
     public static void main( String[] args ) throws IOException {
         JSONObject publications, funding, institution, verified, hours;
 
-        MongoTesting database = new MongoTesting();
+        MongoWrapper database = new MongoWrapper();
 
         JSONObject user = new JSONObject();
         user.put("name", "Sameet Sapra");
@@ -45,8 +44,6 @@ public class App
 
         } else {
             log.log(Level.INFO, "User is already in the database");
-
-            
         }
 
     }

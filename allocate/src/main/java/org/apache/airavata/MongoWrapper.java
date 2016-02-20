@@ -12,11 +12,11 @@ import org.json.simple.JSONObject;
 /**
  * Created by samkreter on 2/20/16.
  */
-public class MongoTesting {
+public class MongoWrapper {
 
     private MongoDatabase db;
     private int results;
-    public MongoTesting(){
+    public MongoWrapper(){
         MongoClient mongoClient = new MongoClient();
         db = mongoClient.getDatabase("resource_allocation");
     }

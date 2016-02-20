@@ -12,44 +12,37 @@ import java.io.IOException;
  */
 public class Soup {
     private String url;
-    public Soup(String url){
+    private String professorName;
+    private int page;
+    public Soup(String url, String name){
+
         this.url = url;
+        this.professorName = name;
+        this.url += "&q="+this.professorName+"&num=20";
+        this.page = 1;
+        print(url);
+
     }
 
     public void getCitations() throws IOException {
-        Document doc = Jsoup.connect(url).get();
-        Elements links = doc.select("a[href]");
-        Elements media = doc.select("[src]");
-        Elements imports = doc.select("link[href]");
+        String pagedUrl = this.url;
+        System.out.println(pagedUrl);
+        Document doc = Jsoup.connect(pagedUrl)
+                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1")
+                .referrer("http://www.google.com")
+                .timeout(12000)
+                .get();
 
-        print("\nMedia: (%d)", media.size());
-        for (Element src : media) {
-            if (src.tagName().equals("img"))
-                print(" * %s: <%s> %sx%s (%s)",
-                        src.tagName(), src.attr("abs:src"), src.attr("width"), src.attr("height"),
-                        trim(src.attr("alt"), 20));
-            else
-                print(" * %s: <%s>", src.tagName(), src.attr("abs:src"));
+        Elements div_links = doc.select(".gs_fl > a:nth-child(1)");
+        Elements publication_names = doc.select(".gs_rt > a:nth-child(1)");
+
+        print("\nLinks: (%d)", div_links.size());
+        for (int i = 0; i < div_links.size(); i++) {
+            Element link = div_links.get(i);
+            Element pub_name = publication_names.get(i);
+            String words = link.text().split(" ");
+            int numCitations = Integer.parse(words[2]);
+            System.out.println(pub_name.text() + " : " + numCitations);
         }
-
-        print("\nImports: (%d)", imports.size());
-        for (Element link : imports) {
-            print(" * %s <%s> (%s)", link.tagName(),link.attr("abs:href"), link.attr("rel"));
-        }
-
-        print("\nLinks: (%d)", links.size());
-        for (Element link : links) {
-            print(" * a: <%s>  (%s)", link.attr("abs:href"), trim(link.text(), 35));
-        }
-    }
-    private static void print(String msg, Object... args) {
-        System.out.println(String.format(msg, args));
-    }
-
-    private static String trim(String s, int width) {
-        if (s.length() > width)
-            return s.substring(0, width-1) + ".";
-        else
-            return s;
     }
 }

@@ -1,4 +1,4 @@
-package com.airavata.allocate;
+package org.apache.airavata;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Document;

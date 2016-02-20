@@ -1,2 +1,2 @@
-com/airavata/allocate/Soup.class
-com/airavata/allocate/App.class
+org/apache/airavata/App.class
+org/apache/airavata/Soup.class

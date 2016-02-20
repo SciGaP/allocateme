@@ -17,8 +17,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 /**
- * Queries the National Science Foundation grant database and returns parsed 
- * data into strings and a JSON object. 
+ * Queries the National Science Foundation grant database (http://www.research.gov/common/webapi/awardapisearch-v1.htm) 
+ * and returns parsed data into strings and a JSON object. 
  * @author Peter Dirks
  */
 public class FundingLookup implements Runnable {

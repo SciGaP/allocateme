@@ -21,7 +21,16 @@ public class App
         JSONObject user = new JSONObject();
         user.put("name", "Sameet Sapra");
         user.put("primaryEmail", "sameet.sapra@gmail.com");
-
+        
+        String fundingNumber = "1052893";
+        FundingLookup fl = new FundingLookup(fundingNumber);
+        try{
+            JSONObject fundingJSON = fl.load();
+        }
+        catch( Exception ex ){
+            System.err.println(ex);
+        }
+        
         // Get user's name / email
 
         // Check if user is already in database

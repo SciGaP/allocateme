@@ -9,6 +9,7 @@ import static java.util.Arrays.asList;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  * Created by samkreter on 2/20/16.
@@ -39,23 +40,24 @@ public class MongoWrapper {
         );
     }
 
+    /**
+     * Take a string formatted representation of the data and add it to the database
+     */
     public void addJSONtoDB(String obj, String collection){
         DBObject dbObject = (DBObject) JSON.parse(obj);
-        db.getCollection(collection).insert(dbObject);
-    }
-
-    public void update(JSONObject user){
-    	
+//        db.getCollection(collection).insertOne();
     }
     
+    /**
+     * @param primaryEmail The user's primary email address to query the database.
+     * Returns a JSONObject containing all of the user's data
+     */
     public JSONObject getUser(String primaryEmail){
         FindIterable<Document> iterator = db.getCollection("user").find(
-                new Document("user.primaryEmail", user.get("primaryEmail"))
+                new Document("user.primaryEmail", primaryEmail)
         );
-        
-        for (Document doc : iterator.iterator()){
-        	System.out.println(doc.toString());
-        } 
+        Document d = iterator.iterator().next();
+        return (JSONObject) JSONValue.parse(d.toJson());
     }
 
 }

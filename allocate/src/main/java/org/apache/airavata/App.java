@@ -53,6 +53,7 @@ public class App
 
         } else {
             log.log(Level.INFO, "User is already in the database");
+            database.getUser((String) user.get("primaryEmail")); 
         }
 
     }

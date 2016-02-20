@@ -56,11 +56,10 @@ public class FundingLookup implements Runnable {
      * @throws Exception UnsupportedEncodingException on bad URL encode, 
      * @throws MalformedURLException on bad URL object creation
      * @throws IOException on IO create failure
-     * @return JSONObject on success, null on failure
      */
-    public JSONObject load () throws Exception
+    public void load () throws Exception
     {
-        if (fundingID == null || fundingID.equals("")) {
+        if( fundingID == null || fundingID.equals("") ){
             throw new Exception("Empty funding ID.");
         }
         
@@ -96,7 +95,7 @@ public class FundingLookup implements Runnable {
         
         
         try {
-            return parseFunding(jsonString);
+            parseFunding(jsonString);
         } catch (Exception ex) {
             System.err.println("parse: "+ex);
             throw ex;
@@ -108,10 +107,9 @@ public class FundingLookup implements Runnable {
      * Parse raw JSON string into JSON object and strings.
      * @param jsonString raw JSON from input reader
      * @throws Exception 
-     * @return JSONObject on success, null on failure
      */
-    private JSONObject parseFunding( String jsonString ) throws Exception{
-        if (jsonString == null || jsonString == "") return null;
+    private void parseFunding( String jsonString ) throws Exception{
+        if (jsonString == null || jsonString == "") return;
         
         // populate JSON object
         try {
@@ -121,7 +119,7 @@ public class FundingLookup implements Runnable {
         }
         
         // error checks
-        if (jsonObj == null) return null;
+        if (jsonObj == null) return;
         String status = "";
         try {
             status = (String)jsonObj.get("status");
@@ -167,9 +165,7 @@ public class FundingLookup implements Runnable {
                 throw ex;
             }
             
-        }// end for
-        
-        return jsonObj;
+        }
         
     }//end parseFunding
     

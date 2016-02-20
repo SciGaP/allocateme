@@ -7,8 +7,10 @@ import java.io.IOException;
 public class App
 {
     public static void main( String[] args ) throws IOException {
+        
         String url = "http://news.ycombinator.com";
         Soup parser = new Soup(url);
         parser.getCitations();
+        
     }
 }

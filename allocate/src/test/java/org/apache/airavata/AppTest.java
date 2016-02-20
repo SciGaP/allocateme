@@ -1,4 +1,4 @@
-package com.airavata.allocate;
+package org.apache.airavata;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

@@ -9,4 +9,4 @@ Setup
 
 4. `mvn package`
 
-5. `java -cp target/allocate-1.0-SNAPSHOT.jar com.airavata.allocate.App`
+5. `java -cp target/allocate-1.0-SNAPSHOT.jar org.apache.airavata.App`

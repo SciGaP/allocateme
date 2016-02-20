@@ -20,8 +20,6 @@ public class Soup {
         this.professorName = name;
         this.url += "&q="+this.professorName+"&num=20";
         this.page = 1;
-        print(url);
-
     }
 
     public void getCitations() throws IOException {
@@ -34,14 +32,12 @@ public class Soup {
                 .get();
 
         Elements div_links = doc.select(".gs_fl > a:nth-child(1)");
-        Elements publication_names = doc.select(".gs_rt > a:nth-child(1)");
-
-        print("\nLinks: (%d)", div_links.size());
+        Elements publication_names = doc.select(".gs_ri > .gs_rt");
         for (int i = 0; i < div_links.size(); i++) {
             Element link = div_links.get(i);
             Element pub_name = publication_names.get(i);
-            String words = link.text().split(" ");
-            int numCitations = Integer.parse(words[2]);
+            String[] words = link.text().split(" ");
+            int numCitations = Integer.parseInt(words[2]);
             System.out.println(pub_name.text() + " : " + numCitations);
         }
     }

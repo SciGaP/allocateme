@@ -58,4 +58,17 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>allocate</module>
+            </modules>
+        </profile>
+    </profiles>
+
 </project>

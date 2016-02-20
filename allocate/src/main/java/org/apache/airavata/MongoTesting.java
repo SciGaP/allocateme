@@ -6,8 +6,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
-import org.json.simple.JSONObject;
-
 
 /**
  * Created by samkreter on 2/20/16.
@@ -27,7 +25,6 @@ public class MongoTesting {
         iterable.forEach(new Block<Document>() {
             @Override
             public void apply(final Document document) {
-                JSONObject o =
                 System.out.println(document.get("address"));
             }
         });

@@ -39,7 +39,17 @@ public class MongoTesting {
     }
 
     public void update(JSONObject user){
-
+    	
+    }
+    
+    public JSONObject getUser(String primaryEmail){
+        FindIterable<Document> iterator = db.getCollection("user").find(
+                new Document("user.primaryEmail", user.get("primaryEmail"))
+        );
+        
+        for (Document doc : iterator.iterator()){
+        	System.out.println(doc.toString());
+        } 
     }
 
 }

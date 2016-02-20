@@ -1,5 +1,9 @@
 package org.apache.airavata;
+
+
+
 import java.io.IOException;
+
 /**
  * Hello world!
  *
@@ -7,8 +11,17 @@ import java.io.IOException;
 public class App
 {
     public static void main( String[] args ) throws IOException {
-        String url = "http://news.ycombinator.com";
-        Soup parser = new Soup(url);
+
+
+        MongoTesting dbTest = new MongoTesting();
+
+        dbTest.printData();
+
+
+        String url = "http://scholar.google.com/scholar?hl=en";
+        String professorName = "Matthew Caesar";
+        Soup parser = new Soup(url, professorName);
         parser.getCitations();
+
     }
 }

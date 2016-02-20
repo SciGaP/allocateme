@@ -4,8 +4,7 @@ import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
 import java.io.IOException;
 
 /**
@@ -23,7 +22,7 @@ public class Soup {
         this.page = 1;
     }
 
-    public JSONArray getCitations() throws IOException {
+    public void getCitations() throws IOException {
         String pagedUrl = this.url;
         System.out.println(pagedUrl);
         Document doc = Jsoup.connect(pagedUrl)
@@ -34,17 +33,12 @@ public class Soup {
 
         Elements div_links = doc.select(".gs_fl > a:nth-child(1)");
         Elements publication_names = doc.select(".gs_ri > .gs_rt");
-        JSONArray publication_list = new JSONArray();
         for (int i = 0; i < div_links.size(); i++) {
             Element link = div_links.get(i);
             Element pub_name = publication_names.get(i);
             String[] words = link.text().split(" ");
             int numCitations = Integer.parseInt(words[2]);
-            JSONObject publication = new JSONObject();
-            publication.put("name", pub_name.text());
-            publication.put("num_citations", numCitations);
-            publication_list.add(publication);
+            System.out.println(pub_name.text() + " : " + numCitations);
         }
-        return publication_list;
     }
 }

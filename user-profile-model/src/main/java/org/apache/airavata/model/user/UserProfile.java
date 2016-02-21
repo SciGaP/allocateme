@@ -70,11 +70,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   private static final org.apache.thrift.protocol.TField AIRAVATA_INTERNAL_USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("airavataInternalUserId", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)3);
   private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField TIER_FIELD_DESC = new org.apache.thrift.protocol.TField("tier", org.apache.thrift.protocol.TType.STRING, (short)5);
-  private static final org.apache.thrift.protocol.TField VERIFIED_FIELD_DESC = new org.apache.thrift.protocol.TField("verified", org.apache.thrift.protocol.TType.STRING, (short)6);
-  private static final org.apache.thrift.protocol.TField PUBLICATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("publications", org.apache.thrift.protocol.TType.LIST, (short)7);
-  private static final org.apache.thrift.protocol.TField FUNDING_FIELD_DESC = new org.apache.thrift.protocol.TField("funding", org.apache.thrift.protocol.TType.LIST, (short)8);
-  private static final org.apache.thrift.protocol.TField INSTITUTION_FIELD_DESC = new org.apache.thrift.protocol.TField("institution", org.apache.thrift.protocol.TType.STRUCT, (short)9);
+  private static final org.apache.thrift.protocol.TField TIER_FIELD_DESC = new org.apache.thrift.protocol.TField("tier", org.apache.thrift.protocol.TType.I64, (short)5);
+  private static final org.apache.thrift.protocol.TField PUBLICATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("publications", org.apache.thrift.protocol.TType.LIST, (short)6);
+  private static final org.apache.thrift.protocol.TField FUNDING_FIELD_DESC = new org.apache.thrift.protocol.TField("funding", org.apache.thrift.protocol.TType.LIST, (short)7);
+  private static final org.apache.thrift.protocol.TField INSTITUTION_FIELD_DESC = new org.apache.thrift.protocol.TField("institution", org.apache.thrift.protocol.TType.STRUCT, (short)8);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -86,8 +85,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   private String airavataInternalUserId; // optional
   private String email; // optional
   private String name; // optional
-  private String tier; // optional
-  private String verified; // optional
+  private long tier; // optional
   private List<Publication> publications; // optional
   private List<String> funding; // optional
   private Institution institution; // optional
@@ -99,10 +97,9 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     EMAIL((short)3, "email"),
     NAME((short)4, "name"),
     TIER((short)5, "tier"),
-    VERIFIED((short)6, "verified"),
-    PUBLICATIONS((short)7, "publications"),
-    FUNDING((short)8, "funding"),
-    INSTITUTION((short)9, "institution");
+    PUBLICATIONS((short)6, "publications"),
+    FUNDING((short)7, "funding"),
+    INSTITUTION((short)8, "institution");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -127,13 +124,11 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
           return NAME;
         case 5: // TIER
           return TIER;
-        case 6: // VERIFIED
-          return VERIFIED;
-        case 7: // PUBLICATIONS
+        case 6: // PUBLICATIONS
           return PUBLICATIONS;
-        case 8: // FUNDING
+        case 7: // FUNDING
           return FUNDING;
-        case 9: // INSTITUTION
+        case 8: // INSTITUTION
           return INSTITUTION;
         default:
           return null;
@@ -175,7 +170,9 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   }
 
   // isset id assignments
-  private static final _Fields optionals[] = {_Fields.USER_MODEL_VERSION,_Fields.AIRAVATA_INTERNAL_USER_ID,_Fields.EMAIL,_Fields.NAME,_Fields.TIER,_Fields.VERIFIED,_Fields.PUBLICATIONS,_Fields.FUNDING,_Fields.INSTITUTION};
+  private static final int __TIER_ISSET_ID = 0;
+  private byte __isset_bitfield = 0;
+  private static final _Fields optionals[] = {_Fields.USER_MODEL_VERSION,_Fields.AIRAVATA_INTERNAL_USER_ID,_Fields.EMAIL,_Fields.NAME,_Fields.TIER,_Fields.PUBLICATIONS,_Fields.FUNDING,_Fields.INSTITUTION};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -188,9 +185,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     tmpMap.put(_Fields.NAME, new org.apache.thrift.meta_data.FieldMetaData("name", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.TIER, new org.apache.thrift.meta_data.FieldMetaData("tier", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.VERIFIED, new org.apache.thrift.meta_data.FieldMetaData("verified", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     tmpMap.put(_Fields.PUBLICATIONS, new org.apache.thrift.meta_data.FieldMetaData("publications", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Publication.class))));
@@ -214,6 +209,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
    * Performs a deep copy on <i>other</i>.
    */
   public UserProfile(UserProfile other) {
+    __isset_bitfield = other.__isset_bitfield;
     if (other.isSetUserModelVersion()) {
       this.userModelVersion = other.userModelVersion;
     }
@@ -226,12 +222,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     if (other.isSetName()) {
       this.name = other.name;
     }
-    if (other.isSetTier()) {
-      this.tier = other.tier;
-    }
-    if (other.isSetVerified()) {
-      this.verified = other.verified;
-    }
+    this.tier = other.tier;
     if (other.isSetPublications()) {
       List<Publication> __this__publications = new ArrayList<Publication>(other.publications.size());
       for (Publication other_element : other.publications) {
@@ -260,8 +251,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
 
     this.email = null;
     this.name = null;
-    this.tier = null;
-    this.verified = null;
+    setTierIsSet(false);
+    this.tier = 0;
     this.publications = null;
     this.funding = null;
     this.institution = null;
@@ -359,50 +350,26 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     }
   }
 
-  public String getTier() {
+  public long getTier() {
     return this.tier;
   }
 
-  public void setTier(String tier) {
+  public void setTier(long tier) {
     this.tier = tier;
+    setTierIsSet(true);
   }
 
   public void unsetTier() {
-    this.tier = null;
+    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __TIER_ISSET_ID);
   }
 
   /** Returns true if field tier is set (has been assigned a value) and false otherwise */
   public boolean isSetTier() {
-    return this.tier != null;
+    return EncodingUtils.testBit(__isset_bitfield, __TIER_ISSET_ID);
   }
 
   public void setTierIsSet(boolean value) {
-    if (!value) {
-      this.tier = null;
-    }
-  }
-
-  public String getVerified() {
-    return this.verified;
-  }
-
-  public void setVerified(String verified) {
-    this.verified = verified;
-  }
-
-  public void unsetVerified() {
-    this.verified = null;
-  }
-
-  /** Returns true if field verified is set (has been assigned a value) and false otherwise */
-  public boolean isSetVerified() {
-    return this.verified != null;
-  }
-
-  public void setVerifiedIsSet(boolean value) {
-    if (!value) {
-      this.verified = null;
-    }
+    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __TIER_ISSET_ID, value);
   }
 
   public int getPublicationsSize() {
@@ -542,15 +509,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       if (value == null) {
         unsetTier();
       } else {
-        setTier((String)value);
-      }
-      break;
-
-    case VERIFIED:
-      if (value == null) {
-        unsetVerified();
-      } else {
-        setVerified((String)value);
+        setTier((Long)value);
       }
       break;
 
@@ -598,9 +557,6 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     case TIER:
       return getTier();
 
-    case VERIFIED:
-      return getVerified();
-
     case PUBLICATIONS:
       return getPublications();
 
@@ -631,8 +587,6 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       return isSetName();
     case TIER:
       return isSetTier();
-    case VERIFIED:
-      return isSetVerified();
     case PUBLICATIONS:
       return isSetPublications();
     case FUNDING:
@@ -697,16 +651,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     if (this_present_tier || that_present_tier) {
       if (!(this_present_tier && that_present_tier))
         return false;
-      if (!this.tier.equals(that.tier))
-        return false;
-    }
-
-    boolean this_present_verified = true && this.isSetVerified();
-    boolean that_present_verified = true && that.isSetVerified();
-    if (this_present_verified || that_present_verified) {
-      if (!(this_present_verified && that_present_verified))
-        return false;
-      if (!this.verified.equals(that.verified))
+      if (this.tier != that.tier)
         return false;
     }
 
@@ -768,11 +713,6 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     list.add(present_tier);
     if (present_tier)
       list.add(tier);
-
-    boolean present_verified = true && (isSetVerified());
-    list.add(present_verified);
-    if (present_verified)
-      list.add(verified);
 
     boolean present_publications = true && (isSetPublications());
     list.add(present_publications);
@@ -846,16 +786,6 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     }
     if (isSetTier()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.tier, other.tier);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetVerified()).compareTo(other.isSetVerified());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetVerified()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.verified, other.verified);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -952,21 +882,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     if (isSetTier()) {
       if (!first) sb.append(", ");
       sb.append("tier:");
-      if (this.tier == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.tier);
-      }
-      first = false;
-    }
-    if (isSetVerified()) {
-      if (!first) sb.append(", ");
-      sb.append("verified:");
-      if (this.verified == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.verified);
-      }
+      sb.append(this.tier);
       first = false;
     }
     if (isSetPublications()) {
@@ -1021,6 +937,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
 
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
+      // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+      __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
     } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
@@ -1078,22 +996,14 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
             }
             break;
           case 5: // TIER
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.tier = iprot.readString();
+            if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+              struct.tier = iprot.readI64();
               struct.setTierIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 6: // VERIFIED
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.verified = iprot.readString();
-              struct.setVerifiedIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 7: // PUBLICATIONS
+          case 6: // PUBLICATIONS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
                 org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
@@ -1112,7 +1022,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 8: // FUNDING
+          case 7: // FUNDING
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
                 org.apache.thrift.protocol.TList _list3 = iprot.readListBegin();
@@ -1130,7 +1040,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 9: // INSTITUTION
+          case 8: // INSTITUTION
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
               struct.institution = new Institution();
               struct.institution.read(iprot);
@@ -1180,19 +1090,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
           oprot.writeFieldEnd();
         }
       }
-      if (struct.tier != null) {
-        if (struct.isSetTier()) {
-          oprot.writeFieldBegin(TIER_FIELD_DESC);
-          oprot.writeString(struct.tier);
-          oprot.writeFieldEnd();
-        }
-      }
-      if (struct.verified != null) {
-        if (struct.isSetVerified()) {
-          oprot.writeFieldBegin(VERIFIED_FIELD_DESC);
-          oprot.writeString(struct.verified);
-          oprot.writeFieldEnd();
-        }
+      if (struct.isSetTier()) {
+        oprot.writeFieldBegin(TIER_FIELD_DESC);
+        oprot.writeI64(struct.tier);
+        oprot.writeFieldEnd();
       }
       if (struct.publications != null) {
         if (struct.isSetPublications()) {
@@ -1262,19 +1163,16 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       if (struct.isSetTier()) {
         optionals.set(4);
       }
-      if (struct.isSetVerified()) {
+      if (struct.isSetPublications()) {
         optionals.set(5);
       }
-      if (struct.isSetPublications()) {
+      if (struct.isSetFunding()) {
         optionals.set(6);
       }
-      if (struct.isSetFunding()) {
+      if (struct.isSetInstitution()) {
         optionals.set(7);
       }
-      if (struct.isSetInstitution()) {
-        optionals.set(8);
-      }
-      oprot.writeBitSet(optionals, 9);
+      oprot.writeBitSet(optionals, 8);
       if (struct.isSetUserModelVersion()) {
         oprot.writeString(struct.userModelVersion);
       }
@@ -1288,10 +1186,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         oprot.writeString(struct.name);
       }
       if (struct.isSetTier()) {
-        oprot.writeString(struct.tier);
-      }
-      if (struct.isSetVerified()) {
-        oprot.writeString(struct.verified);
+        oprot.writeI64(struct.tier);
       }
       if (struct.isSetPublications()) {
         {
@@ -1319,7 +1214,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, UserProfile struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(9);
+      BitSet incoming = iprot.readBitSet(8);
       if (incoming.get(0)) {
         struct.userModelVersion = iprot.readString();
         struct.setUserModelVersionIsSet(true);
@@ -1337,14 +1232,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         struct.setNameIsSet(true);
       }
       if (incoming.get(4)) {
-        struct.tier = iprot.readString();
+        struct.tier = iprot.readI64();
         struct.setTierIsSet(true);
       }
       if (incoming.get(5)) {
-        struct.verified = iprot.readString();
-        struct.setVerifiedIsSet(true);
-      }
-      if (incoming.get(6)) {
         {
           org.apache.thrift.protocol.TList _list10 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
           struct.publications = new ArrayList<Publication>(_list10.size);
@@ -1358,7 +1249,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         }
         struct.setPublicationsIsSet(true);
       }
-      if (incoming.get(7)) {
+      if (incoming.get(6)) {
         {
           org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
           struct.funding = new ArrayList<String>(_list13.size);
@@ -1371,7 +1262,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         }
         struct.setFundingIsSet(true);
       }
-      if (incoming.get(8)) {
+      if (incoming.get(7)) {
         struct.institution = new Institution();
         struct.institution.read(iprot);
         struct.setInstitutionIsSet(true);

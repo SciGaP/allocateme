@@ -69,9 +69,8 @@ struct UserProfile {
     2: optional string airavataInternalUserId = "DO_NOT_ADD_AT_CLIENT",
     3: optional string email,
     4: optional string name,
-    5: optional string tier,
-    6: optional string verified,
-    7: optional list<Publication> publications,
-    8: optional list<string> funding,
-    9: optional Institution institution
+    5: optional i64 tier,
+    6: optional list<Publication> publications,
+    7: optional list<string> funding,
+    8: optional Institution institution
 }

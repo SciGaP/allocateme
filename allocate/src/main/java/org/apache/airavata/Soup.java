@@ -31,10 +31,8 @@ public class Soup implements Metric{
     public JSONArray getCitations() throws IOException {
         String pagedUrl = this.url;
         System.out.println(pagedUrl);
-        Document doc = Jsoup.connect(pagedUrl)
-                .referrer("http://www.google.com")
-                .timeout(12000)
-                .get();
+        Document doc = Jsoup.connect(pagedUrl).
+            	timeout(5000).ignoreHttpErrors(true).followRedirects(true).get();
 
         Elements div_links = doc.select(".gs_fl > a:nth-child(1)");
         Elements publication_names = doc.select(".gs_ri > .gs_rt");

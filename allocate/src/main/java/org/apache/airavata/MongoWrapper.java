@@ -1,13 +1,10 @@
 package org.apache.airavata;
 
-import com.mongodb.util.JSON;
-import org.bson.Document;
-import com.mongodb.*;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.BasicDBObject;
+import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
-import static java.util.Arrays.asList;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
@@ -62,7 +59,7 @@ public class MongoWrapper {
 		Document extractUser = new Document("user.primaryEmail", user.get("primaryEmail"));
 		Document query2 = new Document();
 
-		query2.append("$set", new Document().append("publications", (JSONArray) user.get("publications")).append("institution", new Document("verified", user.get("verified")))
+		query2.append("$set", new Document().append("publications", user.get("publications")).append("institution", new Document("verified", user.get("verified")))
 				.append("tier", user.get("tier")).append("funding", user.get("funding")));
 		db.getCollection("user").updateMany(extractUser, query2);
 		System.out.println("adding done");

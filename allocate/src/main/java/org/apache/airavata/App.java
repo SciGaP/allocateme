@@ -1,8 +1,10 @@
 package org.apache.airavata;
 
 import org.apache.airavata.db.DBWrapper;
+import org.apache.airavata.model.user.Award;
 import org.apache.airavata.model.user.Publication;
 import org.apache.airavata.model.user.UserProfile;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
@@ -54,7 +56,10 @@ public class App
             FundingLookup fl = new FundingLookup(fundingNumber);
             try{
                 JSONObject fundingJSON = fl.load();
-                user.addToFunding(fundingJSON.get("award").toString());
+
+                Award award = new Award();
+                JSONArray temp = (JSONArray)fundingJSON.get("award");
+                user.addToFunding(award);
             }
             catch( Exception ex ){
                 System.err.println(ex);

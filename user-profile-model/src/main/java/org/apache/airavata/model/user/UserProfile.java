@@ -87,7 +87,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   private String name; // optional
   private long tier; // optional
   private List<Publication> publications; // optional
-  private List<String> funding; // optional
+  private List<Award> funding; // optional
   private Institution institution; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -191,7 +191,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Publication.class))));
     tmpMap.put(_Fields.FUNDING, new org.apache.thrift.meta_data.FieldMetaData("funding", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
+            new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Award.class))));
     tmpMap.put(_Fields.INSTITUTION, new org.apache.thrift.meta_data.FieldMetaData("institution", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Institution.class)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -231,7 +231,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       this.publications = __this__publications;
     }
     if (other.isSetFunding()) {
-      List<String> __this__funding = new ArrayList<String>(other.funding);
+      List<Award> __this__funding = new ArrayList<Award>(other.funding.size());
+      for (Award other_element : other.funding) {
+        __this__funding.add(new Award(other_element));
+      }
       this.funding = __this__funding;
     }
     if (other.isSetInstitution()) {
@@ -414,22 +417,22 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     return (this.funding == null) ? 0 : this.funding.size();
   }
 
-  public java.util.Iterator<String> getFundingIterator() {
+  public java.util.Iterator<Award> getFundingIterator() {
     return (this.funding == null) ? null : this.funding.iterator();
   }
 
-  public void addToFunding(String elem) {
+  public void addToFunding(Award elem) {
     if (this.funding == null) {
-      this.funding = new ArrayList<String>();
+      this.funding = new ArrayList<Award>();
     }
     this.funding.add(elem);
   }
 
-  public List<String> getFunding() {
+  public List<Award> getFunding() {
     return this.funding;
   }
 
-  public void setFunding(List<String> funding) {
+  public void setFunding(List<Award> funding) {
     this.funding = funding;
   }
 
@@ -525,7 +528,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       if (value == null) {
         unsetFunding();
       } else {
-        setFunding((List<String>)value);
+        setFunding((List<Award>)value);
       }
       break;
 
@@ -1026,11 +1029,12 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
                 org.apache.thrift.protocol.TList _list3 = iprot.readListBegin();
-                struct.funding = new ArrayList<String>(_list3.size);
-                String _elem4;
+                struct.funding = new ArrayList<Award>(_list3.size);
+                Award _elem4;
                 for (int _i5 = 0; _i5 < _list3.size; ++_i5)
                 {
-                  _elem4 = iprot.readString();
+                  _elem4 = new Award();
+                  _elem4.read(iprot);
                   struct.funding.add(_elem4);
                 }
                 iprot.readListEnd();
@@ -1113,10 +1117,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         if (struct.isSetFunding()) {
           oprot.writeFieldBegin(FUNDING_FIELD_DESC);
           {
-            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.funding.size()));
-            for (String _iter7 : struct.funding)
+            oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.funding.size()));
+            for (Award _iter7 : struct.funding)
             {
-              oprot.writeString(_iter7);
+              _iter7.write(oprot);
             }
             oprot.writeListEnd();
           }
@@ -1200,9 +1204,9 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       if (struct.isSetFunding()) {
         {
           oprot.writeI32(struct.funding.size());
-          for (String _iter9 : struct.funding)
+          for (Award _iter9 : struct.funding)
           {
-            oprot.writeString(_iter9);
+            _iter9.write(oprot);
           }
         }
       }
@@ -1251,12 +1255,13 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       }
       if (incoming.get(6)) {
         {
-          org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-          struct.funding = new ArrayList<String>(_list13.size);
-          String _elem14;
+          org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.funding = new ArrayList<Award>(_list13.size);
+          Award _elem14;
           for (int _i15 = 0; _i15 < _list13.size; ++_i15)
           {
-            _elem14 = iprot.readString();
+            _elem14 = new Award();
+            _elem14.read(iprot);
             struct.funding.add(_elem14);
           }
         }

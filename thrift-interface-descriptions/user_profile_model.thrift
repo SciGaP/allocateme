@@ -51,6 +51,20 @@ struct Institution {
     1: optional bool verified
 }
 
+struct Award {
+    1: optional string id,
+    2: optional string piLastName,
+    3: optional string title,
+    4: optional string awardeeName,
+    5: optional string piFirstName,
+    6: optional string awardeeStateCode,
+    7: optional string agency,
+    8: optional string date,
+    9: optional string fundsObligatedAmt,
+    10: optional string publicAccessMandate,
+    11: optional string awardeeCity
+}
+
 
 /**
  * A structure holding the user profile and its child models.
@@ -71,6 +85,6 @@ struct UserProfile {
     4: optional string name,
     5: optional i64 tier,
     6: optional list<Publication> publications,
-    7: optional list<string> funding,
+    7: optional list<Award> funding,
     8: optional Institution institution
 }

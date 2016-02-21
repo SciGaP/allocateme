@@ -5,10 +5,6 @@
  */
 package org.apache.airavata;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,13 +12,16 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 /**
  * Queries the National Science Foundation grant database (http://www.research.gov/common/webapi/awardapisearch-v1.htm) 
  * and returns parsed data into strings and a JSON object. 
  * @author Peter Dirks
  */
-public class FundingLookup implements Runnable, Metric {
+public class FundingLookup implements Runnable {
     String fundingID;
     Thread runner;
     
@@ -118,33 +117,28 @@ public class FundingLookup implements Runnable, Metric {
     private JSONObject parseFunding( String jsonString ) throws Exception{
         if (jsonString == null || jsonString == "") return null; // parameter check
         
-        // populate JSON object from input string
+        jsonString = jsonString.replace("processJson(","");
+        jsonString = jsonString.replace(");","");
+        JSONObject jsonObj;
         try {
+            jsonObj = (JSONObject)JSONValue.parse(jsonString);
             jsonObj = (JSONObject)JSONValue.parse(jsonString);
         } catch (Exception ex) {
             throw ex;
         }
         
         // error checks on JSON object
-        if (jsonObj == null) return null;
-        String status = "";
-        try {
-            status = (String)jsonObj.get("status");
-        } catch (Exception ex) {
-            throw ex;
+        if (jsonObj == null){ 
+            System.out.println(" NULLLLL");
+            return null;
         }
-        if (status == null) {
-            throw new Exception("Status returned from API was null.");
-        }
-        else if(!status.equals("OK")) {
-            throw new Exception("Status returned from API was not OK.");
-        }
-        
+
         // Get top-level member in JSON object, 'response'
         //      'response' will hold all JSON data
         //      throw this into a separate JSON object perhaps? 
+        JSONObject jsonObj2;
         try {
-            jsonObj = (JSONObject)jsonObj.get("response");
+            jsonObj2 = (JSONObject)jsonObj.get("response");
         } catch (Exception ex) {
             throw ex;
         }
@@ -153,7 +147,7 @@ public class FundingLookup implements Runnable, Metric {
         // json objects into a array-like data structure.
         JSONArray docs; 
         try {
-            docs = (JSONArray)jsonObj.get("award");
+            docs = (JSONArray)jsonObj2.get("award");
         } catch (Exception ex) {
             throw ex;
         }
@@ -163,14 +157,14 @@ public class FundingLookup implements Runnable, Metric {
             try{
                 JSONObject fundingInfo = (JSONObject) doc;
                 
-                agency = (String)fundingInfo.get("agency");
-                awardeeName = (String)fundingInfo.get("awardeeName");
-                fundsObligatedAmt = (String)fundingInfo.get("fundsObligatedAmt");
-                id = (String)fundingInfo.get("id");
-                piFirstName = (String)fundingInfo.get("piFirstName");
-                piLastName = (String)fundingInfo.get("piLastName");
-                date = (String)fundingInfo.get("date");        // TODO make into a date object (?)
-                title = (String)fundingInfo.get("title");
+                this.agency = (String)fundingInfo.get( "agency" );
+                this.awardeeName = (String)fundingInfo.get( "awardeeName" );
+                this.fundsObligatedAmt = (String)fundingInfo.get( "fundsObligatedAmt" );
+                this.id = (String)fundingInfo.get( "id" );
+                this.piFirstName = (String)fundingInfo.get( "piFirstName" );
+                this.piLastName = (String)fundingInfo.get( "piLastName" );
+                this.date = (String)fundingInfo.get( "date" );        // TODO make into a date object (?)
+                this.title = (String)fundingInfo.get( "title" );
                 
             } catch (Exception ex){
                 throw ex;
@@ -178,7 +172,7 @@ public class FundingLookup implements Runnable, Metric {
             
         }// end for
         
-        return jsonObj;
+        return jsonObj2;
         
     }//end parseFunding
     

@@ -32,6 +32,7 @@ public class UserProfileServerHandler implements UserProfileService.Iface {
      * Query CS server to fetch the CPI version
      */
     public String getUserProfileSerbiceVersion() throws TException {
+        //write your implementation
         return user_profile_cpiConstants.UPS_CPI_VERSION;
     }
 

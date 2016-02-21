@@ -29,13 +29,11 @@ public class App
         Email validator = new Email(email);
         user.put("verified", validator.validateEmail(email));
         
-        database.addJSONtoDB(user);
 
         // Get user's name / email
 
         // Check if user is already in database
         boolean userInDatabase = database.userInDB(user);
-
         // If user is already in database, then skip everything and write new hours requested
 
         // Otherwise write user to database
@@ -44,9 +42,9 @@ public class App
             database.createUser(user);
             log.log(Level.INFO, "Added user to database");
             // Publications
-//	        String url = "https://scholar.google.com/scholar?hl=en";
-//	        Soup parser = new Soup(url, name);
-//	        user.put("publications", parser.getCitations());
+            String url = "http://scholar.google.com/scholar?hl=en";
+            Soup parser = new Soup(url, name);
+            user.put("publications", parser.getCitations());
 
 	        String fundingNumber = "1052893";
             FundingLookup fl = new FundingLookup(fundingNumber);
@@ -57,8 +55,8 @@ public class App
             catch( Exception ex ){
                 System.err.println(ex);
             }
+            
             database.addJSONtoDB(user);
-
         } else {
             log.log(Level.INFO, "User is already in the database");
             database.addJSONtoDB(user);

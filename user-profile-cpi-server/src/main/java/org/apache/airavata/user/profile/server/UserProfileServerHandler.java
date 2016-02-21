@@ -23,6 +23,7 @@ package org.apache.airavata.user.profile.server;
 import org.apache.airavata.model.user.UserProfile;
 import org.apache.airavata.user.profile.cpi.UserProfileService;
 import org.apache.airavata.user.profile.cpi.UserProfileServiceException;
+import org.apache.airavata.user.profile.cpi.user_profile_cpiConstants;
 import org.apache.thrift.TException;
 
 public class UserProfileServerHandler implements UserProfileService.Iface {
@@ -31,7 +32,7 @@ public class UserProfileServerHandler implements UserProfileService.Iface {
      * Query CS server to fetch the CPI version
      */
     public String getUserProfileSerbiceVersion() throws TException {
-        return null;
+        return user_profile_cpiConstants.UPS_CPI_VERSION;
     }
 
     /**

@@ -24,6 +24,7 @@ public class App
         
         String fundingNumber = "1052893";
         FundingLookup fl = new FundingLookup(fundingNumber);
+        
         try{
             JSONObject fundingJSON = fl.load();
         }

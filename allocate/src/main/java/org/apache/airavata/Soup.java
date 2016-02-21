@@ -1,11 +1,11 @@
 package org.apache.airavata;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
-import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+
 import java.io.IOException;
 
 /**
@@ -34,6 +34,7 @@ public class Soup implements Metric{
         Document doc = Jsoup.connect(pagedUrl)
                 .referrer("http://www.google.com")
                 .timeout(12000)
+                .userAgent("Mozilla")
                 .get();
 
         Elements div_links = doc.select(".gs_fl > a:nth-child(1)");
@@ -44,11 +45,22 @@ public class Soup implements Metric{
             Element pub_name = publication_names.get(i);
             String[] words = link.text().split(" ");
             int numCitations = Integer.parseInt(words[2]);
+            System.out.println(pub_name.text() + " : " + numCitations);
             JSONObject publication = new JSONObject();
             publication.put("name", pub_name.text());
             publication.put("num_citations", numCitations);
             publication_list.add(publication);
         }
         return publication_list;
+    }
+
+    public static void main(String[] args) throws IOException {
+        Soup soup = new Soup("https://scholar.google.com/scholar?hl=en","Geoffrey Fox");
+        soup.getCitations();
+    }
+
+    @Override
+    public JSONObject load() throws Exception {
+        return null;
     }
 }

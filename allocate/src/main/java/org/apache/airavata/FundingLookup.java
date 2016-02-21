@@ -5,6 +5,10 @@
  */
 package org.apache.airavata;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,9 +16,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 
 /**
  * Queries the National Science Foundation grant database (http://www.research.gov/common/webapi/awardapisearch-v1.htm) 
@@ -162,14 +163,14 @@ public class FundingLookup implements Runnable, Metric {
             try{
                 JSONObject fundingInfo = (JSONObject) doc;
                 
-                agency = (String)fundingInfo.get( "agency" );
-                awardeeName = (String)fundingInfo.get( "awardeeName" );
-                fundsObligatedAmt = (String)fundingInfo.get( "fundsObligatedAmt" );
-                id = (String)fundingInfo.get( "id" );
-                piFirstName = (String)fundingInfo.get( "piFirstName" );
-                piLastName = (String)fundingInfo.get( "piLastName" );
-                date = (String)fundingInfo.get( "date" );        // TODO make into a date object (?)
-                title = (String)fundingInfo.get( "title" );
+                agency = (String)fundingInfo.get("agency");
+                awardeeName = (String)fundingInfo.get("awardeeName");
+                fundsObligatedAmt = (String)fundingInfo.get("fundsObligatedAmt");
+                id = (String)fundingInfo.get("id");
+                piFirstName = (String)fundingInfo.get("piFirstName");
+                piLastName = (String)fundingInfo.get("piLastName");
+                date = (String)fundingInfo.get("date");        // TODO make into a date object (?)
+                title = (String)fundingInfo.get("title");
                 
             } catch (Exception ex){
                 throw ex;

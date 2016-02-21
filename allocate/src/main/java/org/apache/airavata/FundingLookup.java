@@ -39,7 +39,7 @@ public class FundingLookup implements Runnable {
     private String id           = "";
     private String piFirstName  = "";
     private String piLastName   = "";
-    private String date         = "";        // TODO make into a date object
+    private String date         = "";        // TODO make into a date object (?)
     private String title        = "";
     
     /**
@@ -62,11 +62,12 @@ public class FundingLookup implements Runnable {
      */
     public JSONObject load () throws Exception
     {
-        if (fundingID == null || fundingID.equals("")) {
+        if (fundingID == null || fundingID.equals("")) {    // parameter check
             throw new Exception("Empty funding ID.");
         }
         
-        String encodedFundingID;    // create an encoded urlString
+        // create an encoded urlString (scrub out input to be safe)
+        String encodedFundingID;    
         try{
             encodedFundingID = URLEncoder.encode( fundingID, "UTF-8" );
         } catch(UnsupportedEncodingException ex){
@@ -81,6 +82,7 @@ public class FundingLookup implements Runnable {
             throw muex;
         }
         
+        // read JSON into a string with buffered read, works similarly to reading in a local file
         String jsonString = "";
         try{
             BufferedReader in = new BufferedReader(
@@ -92,15 +94,13 @@ public class FundingLookup implements Runnable {
             }
             in.close();
         } catch( IOException ioex ){
-            System.err.println("ioex: "+ioex);
             throw ioex;
         }
         
-        
+        // send along json-string to parseFunding() for parsing into local Strings
         try {
             return parseFunding(jsonString);
         } catch (Exception ex) {
-            System.err.println("parse: "+ex);
             throw ex;
         }
         
@@ -115,16 +115,16 @@ public class FundingLookup implements Runnable {
      * @return null on failure
      */
     private JSONObject parseFunding( String jsonString ) throws Exception{
-        if (jsonString == null || jsonString == "") return null;
+        if (jsonString == null || jsonString == "") return null; // parameter check
         
-        // populate JSON object
+        // populate JSON object from input string
         try {
             jsonObj = (JSONObject)JSONValue.parse(jsonString);
         } catch (Exception ex) {
             throw ex;
         }
         
-        // error checks
+        // error checks on JSON object
         if (jsonObj == null) return null;
         String status = "";
         try {
@@ -139,21 +139,25 @@ public class FundingLookup implements Runnable {
             throw new Exception("Status returned from API was not OK.");
         }
         
+        // Get top-level member in JSON object, 'response'
+        //      'response' will hold all JSON data
+        //      throw this into a separate JSON object perhaps? 
         try {
             jsonObj = (JSONObject)jsonObj.get("response");
         } catch (Exception ex) {
             throw ex;
         }
         
-        // separate JSON children into individual JSON objects, place
-        //  json objects into a array-like data structure
+        // Separate JSON children into individual JSON objects, place
+        // json objects into a array-like data structure.
         JSONArray docs; 
         try {
-            docs = (JSONArray)jsonObj.get("docs");
+            docs = (JSONArray)jsonObj.get("award");
         } catch (Exception ex) {
             throw ex;
         }
         
+        // iterate through awards list, parsing out relevent info
         for( Object doc : docs ){
             try{
                 JSONObject fundingInfo = (JSONObject) doc;

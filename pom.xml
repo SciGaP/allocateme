@@ -66,6 +66,10 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
+                <module>user-profile-model</module>
+                <module>user-profile-cpi-stubs</module>
+                <module>user-profile-cpi-server</module>
+                <module>user-profile-cpi-client</module>
                 <module>allocate</module>
             </modules>
         </profile>

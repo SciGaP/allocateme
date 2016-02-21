@@ -26,6 +26,8 @@ import org.apache.airavata.user.profile.cpi.UserProfileServiceException;
 import org.apache.airavata.user.profile.cpi.user_profile_cpiConstants;
 import org.apache.thrift.TException;
 
+import org.apache.airavata.App;
+
 public class UserProfileServerHandler implements UserProfileService.Iface {
 
     /**
@@ -42,6 +44,7 @@ public class UserProfileServerHandler implements UserProfileService.Iface {
      * @param userProfile
      */
     public String registerUserProfile(UserProfile userProfile) throws UserProfileServiceException, TException {
+        App.
         return "testID";
     }
 

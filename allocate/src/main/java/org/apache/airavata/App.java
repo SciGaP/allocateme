@@ -64,7 +64,7 @@ public class App
             catch( Exception ex ){
                 System.err.println(ex);
             }
-            
+
             database.updateUserProfile(user);
             log.log(Level.INFO, "Wrote user attributes to database");
         } else { // If user is already in database, then skip everything and write new hours requested
@@ -72,5 +72,55 @@ public class App
             database.createUserProfile(user);
             log.log(Level.INFO, "Wrote requested tier and verified email to database");
         }
+    }
+
+    public static String registerUser(UserProfile userProfile){
+        String name = userProfile.getName();
+        String email = userProfile.getEmail();
+        long tier = userProfile.getTier();
+
+        DBWrapper database = new DBWrapper();
+        Email validator = new Email(email);
+
+
+        // Check if user is already in database
+        boolean userInDatabase = database.isExists(email);
+
+        // Write user to database if the user was not found at all
+        if (!userInDatabase){
+            log.log(Level.INFO,  "User not found. Adding user to database");
+            database.createUserProfile(user);
+            log.log(Level.INFO, "Added user to database");
+            // Publications
+            String url = "http://scholar.google.com/scholar?hl=en";
+            Soup parser = new Soup(url, name);
+            ArrayList<Publication> publications = new ArrayList<>();
+            for(int i=0;i<parser.getCitations().size();i++){
+                Publication publication = new Publication();
+                publication.setName(((JSONObject)parser.getCitations().get(i)).get("name").toString());
+                publication.setNumCitations(((JSONObject) parser.getCitations().get(i)).get("num_citations").toString());
+            }
+            user.setPublications(publications);
+
+            FundingLookup fl = new FundingLookup(fundingNumber);
+            try{
+                JSONObject fundingJSON = fl.load();
+
+                Award award = new Award();
+                JSONArray temp = (JSONArray)fundingJSON.get("award");
+                user.addToFunding(award);
+            }
+            catch( Exception ex ){
+                System.err.println(ex);
+            }
+            database.updateUserProfile(user);
+            log.log(Level.INFO, "Wrote user attributes to database");
+        } else { // If user is already in database, then skip everything and write new hours requested
+            log.log(Level.INFO, "User is already in the database");
+            database.createUserProfile(user);
+            log.log(Level.INFO, "Wrote requested tier and verified email to database");
+        }
+
+        return userProfile.toString();
     }
 }

@@ -3,6 +3,10 @@ package org.apache.airavata;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/*
+ * Email helper methods to check if a user-entered email is a valid edu or gov email
+ * @author jchang82
+ */
 public class Email {
 	
 	private String email = "";

@@ -14,18 +14,15 @@ import org.json.simple.JSONValue;
 public class MongoWrapper {
 
 	private MongoDatabase db;
-	private int results;
 
 	public MongoWrapper() {
-		MongoClient mongoClient = new MongoClient();
-		db = mongoClient.getDatabase("resource_allocation");
+		db = new MongoClient().getDatabase("resource_allocation");
 	}
 
 	/**
-	 * Checks weather a user already exists in the database
+	 * Checks whether a user already exists in the database
 	 * 
-	 * @param user
-	 *            Json object with the user data to check against
+	 * @param user JSON object with the user data to check against
 	 * @return boolean value for if the user is there or not
 	 */
 	public boolean userInDB(JSONObject user) {
@@ -35,26 +32,22 @@ public class MongoWrapper {
 	}
 
 	/**
-	 * Creates a new user in the database
+	 * Creates a new user in the database.
 	 * 
-	 * @param user
-	 *            Json object with the user data to store
+	 * @param user JSON object with the user data to store
 	 */
 	public void createUser(JSONObject user) {
-		BasicDBObject documentUser = new BasicDBObject();
 		db.getCollection("user").insertOne(new Document("user",
 				new Document().append("name", user.get("name")).append("primaryEmail", user.get("primaryEmail"))));
 	}
 
 	/**
-	 * Add a json object directly to the database
+	 * Add an entire user json object to the database
 	 * 
-	 * @param user
-	   Json object with the user data
+	 * @param user JSON object with the user data
 	 */
 	public void addJSONtoDB(JSONObject user) {
 		System.out.println(user.toJSONString());
-		System.out.println("adding");
 
 		Document extractUser = new Document("user.primaryEmail", user.get("primaryEmail"));
 		Document query2 = new Document();
@@ -62,15 +55,13 @@ public class MongoWrapper {
 		query2.append("$set", new Document().append("publications", user.get("publications")).append("institution", new Document("verified", user.get("verified")))
 				.append("tier", user.get("tier")).append("funding", user.get("funding")));
 		db.getCollection("user").updateMany(extractUser, query2);
-		System.out.println("adding done");
 	}
 
 	/**
-	 * Get the user from the email address
+	 * Filter user from database by their email address
 	 * 
-	 * @param primaryEmail
-	 * the primary email of the user to query against
-	 * @return a Json object with the user's data
+	 * @param primaryEmail the primary email of the user to query against
+	 * @return a JSON object with the user's data
 	 */
 	public JSONObject getUser(String primaryEmail) {
 		FindIterable<Document> iterator = db.getCollection("user")

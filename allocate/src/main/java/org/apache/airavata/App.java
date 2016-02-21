@@ -14,28 +14,25 @@ public class App
 {
     private static final Logger log = Logger.getLogger( App.class.getName() );
     public static void main( String[] args ) throws IOException {
-
-    	JSONObject user = new JSONObject();
-    	
-        MongoWrapper database = new MongoWrapper();
-        String email = "sameet.sapra@gmail.com";
-        String name = "Matthew Caesar";
-        int tier = 1;
+    	// TODO get these from the parameters of the payload as a request
+        String email = "alberteinstein@princeton.edu";
+        String name = "Albert Einstein";
+        String fundingNumber = "1052893";
+        int tier = 3;
         
+    	JSONObject user = new JSONObject();
+        MongoWrapper database = new MongoWrapper();
+        Email validator = new Email(email);
+
         user.put("name", name);
         user.put("primaryEmail", email);
         user.put("tier", tier);
-        Email validator = new Email(email);
         user.put("verified", validator.validateEmail(email));
-        
-
-        // Get user's name / email
 
         // Check if user is already in database
         boolean userInDatabase = database.userInDB(user);
-        // If user is already in database, then skip everything and write new hours requested
 
-        // Otherwise write user to database
+        // Write user to database if the user was not found at all
         if (!userInDatabase){
             log.log(Level.INFO,  "User not found. Adding user to database");
             database.createUser(user);
@@ -45,7 +42,6 @@ public class App
             Soup parser = new Soup(url, name);
             user.put("publications", parser.getCitations());
 
-	        String fundingNumber = "1052893";
             FundingLookup fl = new FundingLookup(fundingNumber);
             try{
                 JSONObject fundingJSON = fl.load();
@@ -56,9 +52,11 @@ public class App
             }
             
             database.addJSONtoDB(user);
-        } else {
+            log.log(Level.INFO, "Wrote user attributes to database");
+        } else { // If user is already in database, then skip everything and write new hours requested
             log.log(Level.INFO, "User is already in the database");
             database.addJSONtoDB(user);
+            log.log(Level.INFO, "Wrote requested tier and verified email to database");
         }
     }
 }

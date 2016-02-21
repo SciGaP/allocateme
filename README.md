@@ -1,9 +1,19 @@
+Purpose
+======
+The purpose of this project was to develop a backend system that could handle a user's requests for CPU cores by intelligently querying online sources to assess a user's credibility.
+
+Future Goals
+======
+
+- Convert JSONObjects to Thrift models
+- Transfer main algorithm to Thrift endpoints
+
 Setup
 ======
 
 1. `git clone https://github.com/SciGaP/allocateme`
 
-2. Install maven with `brew install maven` (for Mac) or 'sudo apt-get install maven' (for Debian/Ubuntu Linux)
+2. Install maven with `brew install maven` (for Mac) or `sudo apt-get install maven` (for Debian/Ubuntu Linux)
 
 3. `cd allocate/allocate`. (You must be in a directory with `pom.xml` to compile with maven).
 
@@ -12,8 +22,8 @@ Setup
 5. `java -cp target/allocate-1.0-SNAPSHOT.jar org.apache.airavata.App`
 
 
-Sample
+Sample Data
 ======
 <code>
-{ "_id" : ObjectId("56c92f16b72c1e16ac1c9842"), "user" : { "name" : "Matthew Caesar", "primaryEmail" : "sameet.sapra@gmail.com" }, "publications" : [ { "num_citations" : 420, "name" : "Virtual ring routing: network routing inspired by DHTs" }, { "num_citations" : 406, "name" : "Design and implementation of a routing control platform" }, { "num_citations" : 368, "name" : "ROFL: routing on flat labels" }, { "num_citations" : 316, "name" : "Floodless in seattle: a scalable ethernet architecture for large enterprises" }, { "num_citations" : 276, "name" : "Veriflow: Verifying network-wide invariants in real time" }, { "num_citations" : 250, "name" : "BGP routing policies in ISP networks" }, { "num_citations" : 216, "name" : "[BOOK][B] HLP: a next generation inter-domain routing protocol" }, { "num_citations" : 174, "name" : "Debugging the data plane with anteater" }, { "num_citations" : 168, "name" : "Finishing flows quickly with preemptive scheduling" }, { "num_citations" : 157, "name" : "[PDF][PDF] BotGrep: Finding P2P Bots with Structured Graph Analysis." }, { "num_citations" : 151, "name" : "Achieving convergence-free routing using failure-carrying packets" }, { "num_citations" : 115, "name" : "The SAHARA model for service composition across multiple providers" }, { "num_citations" : 69, "name" : "Cirripede: circumvention infrastructure using router redirection with plausible deniability" }, { "num_citations" : 65, "name" : "Revisiting route caching: The world should be flat" }, { "num_citations" : 56, "name" : "[CITATION][C] The Tangled Web of Password Reuse." }, { "num_citations" : 55, "name" : "[BOOK][B] Towards localizing root causes of BGP dynamics" }, { "num_citations" : 51, "name" : "Walk the line: consistent network updates with bandwidth guarantees" }, { "num_citations" : 43, "name" : "Stealthy traffic analysis of low-latency anonymous communication using throughput fingerprinting" }, { "num_citations" : 40, "name" : "Dynamic route recomputation considered harmful" }, { "num_citations" : 5332, "name" : "Genome-wide association study of 14,000 cases of seven common diseases and 3,000 shared controls" } ], "institution" : { "verified" : false }, "tier" : 1, "funding" : null }
+{ "_id" : ObjectId("56c9c5b80eec3c068d68a94c"), "user" : { "name" : "Albert Einstein", "primaryEmail" : "alberteinstein@princeton.edu" }, "publications" : [ { "num_citations" : 14144, "name" : "Can quantum-mechanical description of physical reality be considered complete?" }, { "num_citations" : 3679, "name" : "Investigations on the Theory of the Brownian Movement" }, { "num_citations" : 1993, "name" : "The evolution of physics: The growth of ideas from early concepts to relativity and quanta" }, { "num_citations" : 2665, "name" : "The meaning of relativity: Including the relativistic theory of the non-symmetric field" }, { "num_citations" : 2187, "name" : "Relativity: The special and general theory" }, { "num_citations" : 1483, "name" : "Ideas and opinions" }, { "num_citations" : 1284, "name" : "The theory of the brownian movement" }, { "num_citations" : 2103, "name" : "The bed-load function for sediment transportation in open channel flows" }, { "num_citations" : 1523, "name" : "Erklarung der Perihelionbewegung der Merkur aus der allgemeinen Relativitatstheorie" }, { "num_citations" : 551, "name" : "The collected papers of Albert Einstein" }, { "num_citations" : 1111, "name" : "The principle of relativity" }, { "num_citations" : 909, "name" : "On the movement of small particles suspended in a stationary liquid demanded by the molecular-kinetic theory of heart" }, { "num_citations" : 766, "name" : "Ist die Trägheit eines Körpers von seinem Energieinhalt abhängig?" }, { "num_citations" : 826, "name" : "The gravitational equations and the problem of motion" }, { "num_citations" : 822, "name" : "On the electrodynamics of moving bodie" }, { "num_citations" : 300, "name" : "Albert Einstein, creator and rebel" }, { "num_citations" : 650, "name" : "Lens-like action of a star by the deviation of light in the gravitational field" }, { "num_citations" : 569, "name" : "Why war" }, { "num_citations" : 505, "name" : "On the method of theoretical physics" }, { "num_citations" : 616, "name" : "The world as I see it" } ], "institution" : { "verified" : true }, "tier" : 3, "funding" : { "award" : [ { "id" : "1052893", "piLastName" : "Kukuk", "title" : "Indigenous Women in Science Network (IWSN) Third Annual Meeting", "awardeeName" : "University of Montana", "piFirstName" : "Penelope", "awardeeStateCode" : "MT", "agency" : "NSF", "date" : "09/20/2010", "fundsObligatedAmt" : "99911", "publicAccessMandate" : "0", "awardeeCity" : "Missoula" } ] } }
 </code>

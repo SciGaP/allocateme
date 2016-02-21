@@ -32,7 +32,8 @@ public class UserProfileClient {
 
         try {
             userProfileClient = UserProfileClientFactory.userProfileClient("localhost",9190);
-            System.out.println("SSH Key is " + userProfileClient.getUserProfileSerbiceVersion());
+            System.out.println("User Profile Server Version is " + userProfileClient.getUserProfileSerbiceVersion());
+//            userProfileClient.
 
         } catch (Exception e) {
             e.printStackTrace();

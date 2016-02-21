@@ -21,6 +21,7 @@
 
 package org.apache.airavata.user.profile.client;
 
+import org.apache.airavata.model.user.UserProfile;
 import org.apache.airavata.user.profile.cpi.UserProfileService;
 
 public class UserProfileClient {
@@ -33,7 +34,15 @@ public class UserProfileClient {
         try {
             userProfileClient = UserProfileClientFactory.userProfileClient("localhost",9190);
             System.out.println("User Profile Server Version is " + userProfileClient.getUserProfileSerbiceVersion());
-//            userProfileClient.
+
+            UserProfile userProfile = new UserProfile();
+            userProfile.setEmail("alberteinstein@princeton.edu");
+
+            String userId = userProfileClient.registerUserProfile(userProfile);
+            System.out.println("Register User Profile Response " + userId);
+
+            userProfile = userProfileClient.getUserProfile("alberteinstein@princeton.edu");
+            System.out.println(userProfile);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package org.apache.airavata;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.airavata.db.DBWrapper;
 import org.apache.airavata.model.user.Award;
 import org.apache.airavata.model.user.Publication;
@@ -91,7 +92,8 @@ public class App
         // Write user to database if the user was not found at all
         if (!userInDatabase){
             log.log(Level.INFO,  "User not found. Adding user to database");
-            database.createUserProfile(userProfile);
+            try {
+                database.createUserProfile(userProfile);
             log.log(Level.INFO, "Added user to database");
             // Publications
             String url = "http://scholar.google.com/scholar?hl=en";
@@ -105,21 +107,25 @@ public class App
             userProfile.setPublications(publications);
 
             FundingLookup fl = new FundingLookup(fundingID);
-            try{
                 JSONObject fundingJSON = fl.load();
 
                 Award award = new Award();
                 JSONArray temp = (JSONArray)fundingJSON.get("award");
                 userProfile.addToFunding(award);
-            }
-            catch( Exception ex ){
+                database.updateUserProfile(userProfile);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            } catch( Exception ex ){
                 System.err.println(ex);
             }
-            database.updateUserProfile(userProfile);
             log.log(Level.INFO, "Wrote user attributes to database");
         } else { // If user is already in database, then skip everything and write new hours requested
             log.log(Level.INFO, "User is already in the database");
-            database.createUserProfile(userProfile);
+            try {
+                database.createUserProfile(userProfile);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
             log.log(Level.INFO, "Wrote requested tier and verified email to database");
         }
 
@@ -127,10 +133,12 @@ public class App
     }
 
     public static UserProfile getUserByEmail(String email) {
+        UserProfile userProfile = new UserProfile();
         try {
-            return database.getUserProfile(email);
+            userProfile =  database.getUserProfile(email);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return userProfile;
     }
 }

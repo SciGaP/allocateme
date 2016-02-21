@@ -18,6 +18,9 @@ import java.util.logging.Logger;
  */
 public class App
 {
+
+    private static DBWrapper database = new DBWrapper();
+
     private static final Logger log = Logger.getLogger( App.class.getName() );
     public static void main( String[] args ) throws IOException {
     	// TODO get these from the parameters of the payload as a request
@@ -27,7 +30,6 @@ public class App
         int tier = 3;
         
     	UserProfile user = new UserProfile();
-        DBWrapper database = new DBWrapper();
         Email validator = new Email(email);
 
         user.setName(name);
@@ -122,5 +124,13 @@ public class App
         }
 
         return userProfile.toString();
+    }
+
+    public static UserProfile getUserByEmail(String email) {
+        try {
+            return database.getUserProfile(email);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

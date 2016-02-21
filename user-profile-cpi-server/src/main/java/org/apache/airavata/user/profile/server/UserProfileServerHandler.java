@@ -44,12 +44,11 @@ public class UserProfileServerHandler implements UserProfileService.Iface {
      * @param userProfile
      */
     public String registerUserProfile(UserProfile userProfile) throws UserProfileServiceException, TException {
-        App.
-        return "testID";
+        return App.registerUser(userProfile);
     }
 
     public UserProfile getUserProfile(String airavataInternalUserId) throws UserProfileServiceException, TException {
-        return null;
+        return App.getUserByEmail(airavataInternalUserId);
     }
 
     public boolean deleteUserProfile(String airavataInternalUserId) throws UserProfileServiceException, TException {

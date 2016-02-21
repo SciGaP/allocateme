@@ -24,6 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.apache.airavata.model.user.UserProfile;
 import org.apache.thrift.TBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,11 +44,13 @@ public class ModelConversionHelper {
      */
     private void init() {
         this.objectMapper = new ObjectMapper();
-        SimpleModule module = new SimpleModule("AiravataModule",
+        SimpleModule module = new SimpleModule("UserProfileService",
                 new Version(1, 0, 0, null, null, null));
 
-//        module.addSerializer(Gateway.class, new GatewaySerializer());
-//        module.addDeserializer(Gateway.class, new GatewayDeserializer());
+        module.addSerializer(UserProfile.class, new UserProfileSerializer());
+        module.addDeserializer(UserProfile.class, new UserProfileDeserializer());
+
+        objectMapper.registerModule(module);
     }
 
     /**

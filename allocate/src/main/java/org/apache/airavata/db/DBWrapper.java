@@ -1,82 +1,103 @@
+/*
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+*/
 package org.apache.airavata.db;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
+import org.apache.airavata.model.user.UserProfile;
 import org.bson.Document;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Created by samkreter on 2/20/16.
- */
+import java.io.IOException;
+
 public class DBWrapper {
+    private final static Logger logger = LoggerFactory.getLogger(DBWrapper.class);
 
-	private MongoDatabase db;
-	private int results;
+    private MongoDatabase db;
+    private ModelConversionHelper modelConversionHelper;
 
-	public DBWrapper() {
-		MongoClient mongoClient = new MongoClient();
-		db = mongoClient.getDatabase("resource_allocation");
-	}
+    public DBWrapper(){
+        MongoClient mongoClient = new MongoClient();
+        db = mongoClient.getDatabase("resource_allocation");
+        modelConversionHelper = new ModelConversionHelper();
+    }
 
-	/**
-	 * Checks weather a user already exists in the database
-	 * 
-	 * @param user
-	 *            Json object with the user data to check against
-	 * @return boolean value for if the user is there or not
-	 */
-	public boolean userInDB(JSONObject user) {
-		FindIterable<Document> iterator = db.getCollection("user")
-				.find(new Document("user.primaryEmail", user.get("primaryEmail")));
-		return iterator.iterator().hasNext();
-	}
+    /**
+     * Check whether there is an existing UserProfile
+     * @param email
+     * @return
+     */
+    public boolean isExists(String email) {
+        FindIterable<Document> iterator = db.getCollection("user")
+                .find(new Document("user.email", email));
+        return iterator.iterator().hasNext();
+    }
 
-	/**
-	 * Creates a new user in the database
-	 * 
-	 * @param user
-	 *            Json object with the user data to store
-	 */
-	public void createUser(JSONObject user) {
-		BasicDBObject documentUser = new BasicDBObject();
-		db.getCollection("user").insertOne(new Document("user",
-				new Document().append("name", user.get("name")).append("primaryEmail", user.get("primaryEmail"))));
-	}
 
-	/**
-	 * Add a json object directly to the database
-	 * 
-	 * @param user
-	   Json object with the user data
-	 */
-	public void addJSONtoDB(JSONObject user) {
-		System.out.println(user.toJSONString());
-		System.out.println("adding");
+    /**
+     * Creates new UserProfile
+     * @param userProfile
+     * @throws JsonProcessingException
+     */
+    public void createUserProfile(UserProfile userProfile) throws JsonProcessingException {
+        db.getCollection("user").insertOne(Document.parse(modelConversionHelper.serializeObject(userProfile)));
+    }
 
-		Document extractUser = new Document("user.primaryEmail", user.get("primaryEmail"));
-		Document query2 = new Document();
+    /**
+     * Updates existing UserProfile
+     * @param userProfile
+     * @throws JsonProcessingException
+     */
+    public void updateUserProfile(UserProfile userProfile) throws JsonProcessingException {
+        db.getCollection("user").updateOne(new BasicDBObject("email", userProfile.getEmail()),new Document("$set",
+                Document.parse(modelConversionHelper.serializeObject(userProfile))));
+    }
 
-		query2.append("$set", new Document().append("publications", user.get("publications")).append("institution", new Document("verified", user.get("verified")))
-				.append("tier", user.get("tier")).append("funding", user.get("funding")));
-		db.getCollection("user").updateMany(extractUser, query2);
-		System.out.println("adding done");
-	}
+    /**
+     * Retrieve existing UserProfile providing email
+     * @param email
+     * @return
+     * @throws IOException
+     */
+    public UserProfile getUserProfile(String  email) throws IOException {
+        FindIterable<Document> iterator = db.getCollection("user").find(new Document("email", email)).limit(1);
+        if(iterator.iterator().hasNext()){
+            return (UserProfile)modelConversionHelper.deserializeObject(UserProfile.class, iterator.iterator().next().toJson());
+        }else{
+            return null;
+        }
+    }
 
-	/**
-	 * Get the user from the email address
-	 * 
-	 * @param primaryEmail
-	 * the primary email of the user to query against
-	 * @return a Json object with the user's data
-	 */
-	public JSONObject getUser(String primaryEmail) {
-		FindIterable<Document> iterator = db.getCollection("user")
-				.find(new Document("user.primaryEmail", primaryEmail));
-		Document d = iterator.iterator().next();
-		return (JSONObject) JSONValue.parse(d.toJson());
-	}
-
+    /**
+     * Remove existing UserProfile providing user email
+     * @param email
+     */
+    public void removeUserProfile(String email) {
+        FindIterable<Document> iterator = db.getCollection("user").find(new Document("email", email)).limit(1);
+        if(iterator.iterator().hasNext()){
+            db.getCollection("user").deleteOne(iterator.iterator().next());
+        }
+    }
 }

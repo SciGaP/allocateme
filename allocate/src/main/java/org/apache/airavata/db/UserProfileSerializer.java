@@ -20,9 +20,21 @@
 */
 package org.apache.airavata.db;
 
+import org.apache.airavata.model.user.UserProfile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExperimentSerializer {
-    private final static Logger logger = LoggerFactory.getLogger(ExperimentSerializer.class);
+public class UserProfileSerializer extends
+        AbstractThriftSerializer<UserProfile._Fields, UserProfile> {
+    private final static Logger logger = LoggerFactory.getLogger(UserProfileSerializer.class);
+
+    @Override
+    protected UserProfile._Fields[] getFieldValues() {
+        return UserProfile._Fields.values();
+    }
+
+    @Override
+    protected Class<UserProfile> getThriftClass() {
+        return null;
+    }
 }

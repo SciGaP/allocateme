@@ -23,7 +23,7 @@
  namespace cpp apache.airavata.model.user
  namespace py apache.airavata.model.user
 
- const string USER_PROFILE_VERSION = "1.0"
+const string USER_PROFILE_VERSION = "1.0"
 
 enum Status {
     ACTIVE,
@@ -55,10 +55,10 @@ enum Status {
 */
 
 struct UserProfile {
-    1: required string userModelVersion = USER_PROFILE_VERSION,
-    2: required string airavataInternalUserId = "DO_NOT_ADD_AT_CLIENT",
-    3: required list<string> email,
-    4: optional string openIDConnect,
+    1: optional string userModelVersion = USER_PROFILE_VERSION,
+    2: optional string airavataInternalUserId = "DO_NOT_ADD_AT_CLIENT",
+    3: optional string email,
+    4: optional string openIdConnect,
     5: optional string saml,
     6: optional string officialName,
     7: optional string preferredName,

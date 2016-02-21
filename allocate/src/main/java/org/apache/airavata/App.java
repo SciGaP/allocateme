@@ -4,7 +4,6 @@ import java.util.logging.*;
 import java.io.IOException;
 import java.util.logging.Level;
 
-import org.apache.airavata.db.DBWrapper;
 import org.json.simple.JSONObject;
 
 /**
@@ -18,7 +17,7 @@ public class App
 
     	JSONObject user = new JSONObject();
     	
-        DBWrapper database = new DBWrapper();
+        MongoWrapper database = new MongoWrapper();
         String email = "sameet.sapra@gmail.com";
         String name = "Matthew Caesar";
         int tier = 1;

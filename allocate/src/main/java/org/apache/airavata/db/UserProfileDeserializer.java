@@ -20,9 +20,24 @@
 */
 package org.apache.airavata.db;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.airavata.model.user.UserProfile;
+import org.apache.thrift.TException;
 
-public class ExperimentDeserializer {
-    private final static Logger logger = LoggerFactory.getLogger(ExperimentDeserializer.class);
+public class UserProfileDeserializer extends
+        AbstractThriftDeserializer<UserProfile._Fields, UserProfile> {
+
+    @Override
+    protected UserProfile._Fields getField(final String fieldName) {
+        return UserProfile._Fields.valueOf(fieldName);
+    }
+
+    @Override
+    protected UserProfile newInstance() {
+        return new UserProfile();
+    }
+
+    @Override
+    protected void validate(final UserProfile instance) throws TException {
+        instance.validate();
+    }
 }

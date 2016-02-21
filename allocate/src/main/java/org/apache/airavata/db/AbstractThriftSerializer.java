@@ -21,7 +21,6 @@
 package org.apache.airavata.db;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.google.common.base.CaseFormat;
@@ -52,17 +51,17 @@ public abstract class AbstractThriftSerializer<E extends TFieldIdEnum, T extends
 
     @Override
     public void serialize(final T value, final JsonGenerator jgen, final SerializerProvider provider)
-            throws IOException, JsonProcessingException {
+            throws IOException{
         jgen.writeStartObject();
         for(final E field : getFieldValues()) {
             if(value.isSet(field)) {
                 final Object fieldValue = value.getFieldValue(field);
                 if(fieldValue != null) {
                     log.debug("Adding field {} to the JSON string...",
-                            CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE,field.getFieldName())
+                            CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL,field.getFieldName())
                     );
 
-                    jgen.writeFieldName(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE,field.getFieldName()));
+                    jgen.writeFieldName(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL,field.getFieldName()));
                     if(fieldValue instanceof Short) {
                         jgen.writeNumber((Short)fieldValue);
                     } else if(fieldValue instanceof Integer) {
@@ -79,7 +78,7 @@ public abstract class AbstractThriftSerializer<E extends TFieldIdEnum, T extends
                         jgen.writeString(fieldValue.toString());
                     } else if(fieldValue instanceof Collection) {
                         log.debug("Array opened for field {}.",
-                                CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE,field.getFieldName())
+                                CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL,field.getFieldName())
                         );
                         jgen.writeStartArray();
                         for(final Object arrayObject : (Collection<?>)fieldValue) {
@@ -87,19 +86,19 @@ public abstract class AbstractThriftSerializer<E extends TFieldIdEnum, T extends
                         }
                         jgen.writeEndArray();
                         log.debug("Array closed for field {}.",
-                                CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE,field.getFieldName())
+                                CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL,field.getFieldName())
                         );
                     } else {
                         jgen.writeObject(fieldValue);
                     }
                 } else {
                     log.debug("Skipping converting field {} to JSON:  value is null!",
-                            CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE,field.getFieldName())
+                            CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL,field.getFieldName())
                     );
                 }
             } else {
                 log.debug("Skipping converting field {} to JSON:  field has not been set!",
-                        CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE,field.getFieldName())
+                        CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL,field.getFieldName())
                 );
             }
         }

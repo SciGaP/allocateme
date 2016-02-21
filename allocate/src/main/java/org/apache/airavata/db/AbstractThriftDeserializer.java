@@ -53,7 +53,7 @@ public abstract class AbstractThriftDeserializer<E extends TFieldIdEnum, T exten
     public T deserialize(final JsonParser jp, final DeserializationContext ctxt) throws IOException, JsonProcessingException {
         final T instance = newInstance();
         final ObjectMapper mapper = (ObjectMapper)jp.getCodec();
-        final ObjectNode rootNode = (ObjectNode)mapper.readTree(jp);
+        final ObjectNode rootNode = mapper.readTree(jp);
         final Iterator<Map.Entry<String, JsonNode>> iterator = rootNode.fields();
 
         while(iterator.hasNext()) {
@@ -67,7 +67,7 @@ public abstract class AbstractThriftDeserializer<E extends TFieldIdEnum, T exten
                  */
                 if(!currentField.getKey().equalsIgnoreCase("_id")
                         && currentField.getValue().getNodeType() != JsonNodeType.NULL) {
-                    final E field = getField(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_UNDERSCORE, currentField.getKey()));
+                    final E field = getField(CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, currentField.getKey()));
                     final JsonParser parser = currentField.getValue().traverse();
                     parser.setCodec(mapper);
                     final Object value = mapper.readValue(parser, generateValueType(instance, field));

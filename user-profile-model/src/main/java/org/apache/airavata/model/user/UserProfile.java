@@ -68,8 +68,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
 
   private static final org.apache.thrift.protocol.TField USER_MODEL_VERSION_FIELD_DESC = new org.apache.thrift.protocol.TField("userModelVersion", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField AIRAVATA_INTERNAL_USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("airavataInternalUserId", org.apache.thrift.protocol.TType.STRING, (short)2);
-  private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.LIST, (short)3);
-  private static final org.apache.thrift.protocol.TField OPEN_IDCONNECT_FIELD_DESC = new org.apache.thrift.protocol.TField("openIDConnect", org.apache.thrift.protocol.TType.STRING, (short)4);
+  private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)3);
+  private static final org.apache.thrift.protocol.TField OPEN_ID_CONNECT_FIELD_DESC = new org.apache.thrift.protocol.TField("openIdConnect", org.apache.thrift.protocol.TType.STRING, (short)4);
   private static final org.apache.thrift.protocol.TField SAML_FIELD_DESC = new org.apache.thrift.protocol.TField("saml", org.apache.thrift.protocol.TType.STRING, (short)5);
   private static final org.apache.thrift.protocol.TField OFFICIAL_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("officialName", org.apache.thrift.protocol.TType.STRING, (short)6);
   private static final org.apache.thrift.protocol.TField PREFERRED_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("preferredName", org.apache.thrift.protocol.TType.STRING, (short)7);
@@ -83,10 +83,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     schemes.put(TupleScheme.class, new UserProfileTupleSchemeFactory());
   }
 
-  private String userModelVersion; // required
-  private String airavataInternalUserId; // required
-  private List<String> email; // required
-  private String openIDConnect; // optional
+  private String userModelVersion; // optional
+  private String airavataInternalUserId; // optional
+  private String email; // optional
+  private String openIdConnect; // optional
   private String saml; // optional
   private String officialName; // optional
   private String preferredName; // optional
@@ -99,7 +99,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     USER_MODEL_VERSION((short)1, "userModelVersion"),
     AIRAVATA_INTERNAL_USER_ID((short)2, "airavataInternalUserId"),
     EMAIL((short)3, "email"),
-    OPEN_IDCONNECT((short)4, "openIDConnect"),
+    OPEN_ID_CONNECT((short)4, "openIdConnect"),
     SAML((short)5, "saml"),
     OFFICIAL_NAME((short)6, "officialName"),
     PREFERRED_NAME((short)7, "preferredName"),
@@ -126,8 +126,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
           return AIRAVATA_INTERNAL_USER_ID;
         case 3: // EMAIL
           return EMAIL;
-        case 4: // OPEN_IDCONNECT
-          return OPEN_IDCONNECT;
+        case 4: // OPEN_ID_CONNECT
+          return OPEN_ID_CONNECT;
         case 5: // SAML
           return SAML;
         case 6: // OFFICIAL_NAME
@@ -180,18 +180,17 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   }
 
   // isset id assignments
-  private static final _Fields optionals[] = {_Fields.OPEN_IDCONNECT,_Fields.SAML,_Fields.OFFICIAL_NAME,_Fields.PREFERRED_NAME,_Fields.GIVEN_NAME,_Fields.FAMILY_NAME,_Fields.DISPLAY_NAME};
+  private static final _Fields optionals[] = {_Fields.USER_MODEL_VERSION,_Fields.AIRAVATA_INTERNAL_USER_ID,_Fields.EMAIL,_Fields.OPEN_ID_CONNECT,_Fields.SAML,_Fields.OFFICIAL_NAME,_Fields.PREFERRED_NAME,_Fields.GIVEN_NAME,_Fields.FAMILY_NAME,_Fields.DISPLAY_NAME};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.USER_MODEL_VERSION, new org.apache.thrift.meta_data.FieldMetaData("userModelVersion", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.USER_MODEL_VERSION, new org.apache.thrift.meta_data.FieldMetaData("userModelVersion", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.AIRAVATA_INTERNAL_USER_ID, new org.apache.thrift.meta_data.FieldMetaData("airavataInternalUserId", org.apache.thrift.TFieldRequirementType.REQUIRED, 
+    tmpMap.put(_Fields.AIRAVATA_INTERNAL_USER_ID, new org.apache.thrift.meta_data.FieldMetaData("airavataInternalUserId", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.EMAIL, new org.apache.thrift.meta_data.FieldMetaData("email", org.apache.thrift.TFieldRequirementType.REQUIRED, 
-        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
-    tmpMap.put(_Fields.OPEN_IDCONNECT, new org.apache.thrift.meta_data.FieldMetaData("openIDConnect", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.EMAIL, new org.apache.thrift.meta_data.FieldMetaData("email", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
+    tmpMap.put(_Fields.OPEN_ID_CONNECT, new org.apache.thrift.meta_data.FieldMetaData("openIdConnect", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.SAML, new org.apache.thrift.meta_data.FieldMetaData("saml", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
@@ -216,17 +215,6 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
 
   }
 
-  public UserProfile(
-    String userModelVersion,
-    String airavataInternalUserId,
-    List<String> email)
-  {
-    this();
-    this.userModelVersion = userModelVersion;
-    this.airavataInternalUserId = airavataInternalUserId;
-    this.email = email;
-  }
-
   /**
    * Performs a deep copy on <i>other</i>.
    */
@@ -238,11 +226,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       this.airavataInternalUserId = other.airavataInternalUserId;
     }
     if (other.isSetEmail()) {
-      List<String> __this__email = new ArrayList<String>(other.email);
-      this.email = __this__email;
+      this.email = other.email;
     }
-    if (other.isSetOpenIDConnect()) {
-      this.openIDConnect = other.openIDConnect;
+    if (other.isSetOpenIdConnect()) {
+      this.openIdConnect = other.openIdConnect;
     }
     if (other.isSetSaml()) {
       this.saml = other.saml;
@@ -275,7 +262,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     this.airavataInternalUserId = "DO_NOT_ADD_AT_CLIENT";
 
     this.email = null;
-    this.openIDConnect = null;
+    this.openIdConnect = null;
     this.saml = null;
     this.officialName = null;
     this.preferredName = null;
@@ -330,26 +317,11 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     }
   }
 
-  public int getEmailSize() {
-    return (this.email == null) ? 0 : this.email.size();
-  }
-
-  public java.util.Iterator<String> getEmailIterator() {
-    return (this.email == null) ? null : this.email.iterator();
-  }
-
-  public void addToEmail(String elem) {
-    if (this.email == null) {
-      this.email = new ArrayList<String>();
-    }
-    this.email.add(elem);
-  }
-
-  public List<String> getEmail() {
+  public String getEmail() {
     return this.email;
   }
 
-  public void setEmail(List<String> email) {
+  public void setEmail(String email) {
     this.email = email;
   }
 
@@ -368,26 +340,26 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     }
   }
 
-  public String getOpenIDConnect() {
-    return this.openIDConnect;
+  public String getOpenIdConnect() {
+    return this.openIdConnect;
   }
 
-  public void setOpenIDConnect(String openIDConnect) {
-    this.openIDConnect = openIDConnect;
+  public void setOpenIdConnect(String openIdConnect) {
+    this.openIdConnect = openIdConnect;
   }
 
-  public void unsetOpenIDConnect() {
-    this.openIDConnect = null;
+  public void unsetOpenIdConnect() {
+    this.openIdConnect = null;
   }
 
-  /** Returns true if field openIDConnect is set (has been assigned a value) and false otherwise */
-  public boolean isSetOpenIDConnect() {
-    return this.openIDConnect != null;
+  /** Returns true if field openIdConnect is set (has been assigned a value) and false otherwise */
+  public boolean isSetOpenIdConnect() {
+    return this.openIdConnect != null;
   }
 
-  public void setOpenIDConnectIsSet(boolean value) {
+  public void setOpenIdConnectIsSet(boolean value) {
     if (!value) {
-      this.openIDConnect = null;
+      this.openIdConnect = null;
     }
   }
 
@@ -551,15 +523,15 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       if (value == null) {
         unsetEmail();
       } else {
-        setEmail((List<String>)value);
+        setEmail((String)value);
       }
       break;
 
-    case OPEN_IDCONNECT:
+    case OPEN_ID_CONNECT:
       if (value == null) {
-        unsetOpenIDConnect();
+        unsetOpenIdConnect();
       } else {
-        setOpenIDConnect((String)value);
+        setOpenIdConnect((String)value);
       }
       break;
 
@@ -625,8 +597,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     case EMAIL:
       return getEmail();
 
-    case OPEN_IDCONNECT:
-      return getOpenIDConnect();
+    case OPEN_ID_CONNECT:
+      return getOpenIdConnect();
 
     case SAML:
       return getSaml();
@@ -663,8 +635,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       return isSetAiravataInternalUserId();
     case EMAIL:
       return isSetEmail();
-    case OPEN_IDCONNECT:
-      return isSetOpenIDConnect();
+    case OPEN_ID_CONNECT:
+      return isSetOpenIdConnect();
     case SAML:
       return isSetSaml();
     case OFFICIAL_NAME:
@@ -721,12 +693,12 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         return false;
     }
 
-    boolean this_present_openIDConnect = true && this.isSetOpenIDConnect();
-    boolean that_present_openIDConnect = true && that.isSetOpenIDConnect();
-    if (this_present_openIDConnect || that_present_openIDConnect) {
-      if (!(this_present_openIDConnect && that_present_openIDConnect))
+    boolean this_present_openIdConnect = true && this.isSetOpenIdConnect();
+    boolean that_present_openIdConnect = true && that.isSetOpenIdConnect();
+    if (this_present_openIdConnect || that_present_openIdConnect) {
+      if (!(this_present_openIdConnect && that_present_openIdConnect))
         return false;
-      if (!this.openIDConnect.equals(that.openIDConnect))
+      if (!this.openIdConnect.equals(that.openIdConnect))
         return false;
     }
 
@@ -806,10 +778,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     if (present_email)
       list.add(email);
 
-    boolean present_openIDConnect = true && (isSetOpenIDConnect());
-    list.add(present_openIDConnect);
-    if (present_openIDConnect)
-      list.add(openIDConnect);
+    boolean present_openIdConnect = true && (isSetOpenIdConnect());
+    list.add(present_openIdConnect);
+    if (present_openIdConnect)
+      list.add(openIdConnect);
 
     boolean present_saml = true && (isSetSaml());
     list.add(present_saml);
@@ -882,12 +854,12 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetOpenIDConnect()).compareTo(other.isSetOpenIDConnect());
+    lastComparison = Boolean.valueOf(isSetOpenIdConnect()).compareTo(other.isSetOpenIdConnect());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetOpenIDConnect()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.openIDConnect, other.openIDConnect);
+    if (isSetOpenIdConnect()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.openIdConnect, other.openIdConnect);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -972,36 +944,42 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     StringBuilder sb = new StringBuilder("UserProfile(");
     boolean first = true;
 
-    sb.append("userModelVersion:");
-    if (this.userModelVersion == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.userModelVersion);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("airavataInternalUserId:");
-    if (this.airavataInternalUserId == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.airavataInternalUserId);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("email:");
-    if (this.email == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.email);
-    }
-    first = false;
-    if (isSetOpenIDConnect()) {
-      if (!first) sb.append(", ");
-      sb.append("openIDConnect:");
-      if (this.openIDConnect == null) {
+    if (isSetUserModelVersion()) {
+      sb.append("userModelVersion:");
+      if (this.userModelVersion == null) {
         sb.append("null");
       } else {
-        sb.append(this.openIDConnect);
+        sb.append(this.userModelVersion);
+      }
+      first = false;
+    }
+    if (isSetAiravataInternalUserId()) {
+      if (!first) sb.append(", ");
+      sb.append("airavataInternalUserId:");
+      if (this.airavataInternalUserId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.airavataInternalUserId);
+      }
+      first = false;
+    }
+    if (isSetEmail()) {
+      if (!first) sb.append(", ");
+      sb.append("email:");
+      if (this.email == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.email);
+      }
+      first = false;
+    }
+    if (isSetOpenIdConnect()) {
+      if (!first) sb.append(", ");
+      sb.append("openIdConnect:");
+      if (this.openIdConnect == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.openIdConnect);
       }
       first = false;
     }
@@ -1071,18 +1049,6 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
 
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
-    if (!isSetUserModelVersion()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'userModelVersion' is unset! Struct:" + toString());
-    }
-
-    if (!isSetAiravataInternalUserId()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'airavataInternalUserId' is unset! Struct:" + toString());
-    }
-
-    if (!isSetEmail()) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'email' is unset! Struct:" + toString());
-    }
-
     // check for sub-struct validity
   }
 
@@ -1137,27 +1103,17 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
             }
             break;
           case 3: // EMAIL
-            if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
-              {
-                org.apache.thrift.protocol.TList _list0 = iprot.readListBegin();
-                struct.email = new ArrayList<String>(_list0.size);
-                String _elem1;
-                for (int _i2 = 0; _i2 < _list0.size; ++_i2)
-                {
-                  _elem1 = iprot.readString();
-                  struct.email.add(_elem1);
-                }
-                iprot.readListEnd();
-              }
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.email = iprot.readString();
               struct.setEmailIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 4: // OPEN_IDCONNECT
+          case 4: // OPEN_ID_CONNECT
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.openIDConnect = iprot.readString();
-              struct.setOpenIDConnectIsSet(true);
+              struct.openIdConnect = iprot.readString();
+              struct.setOpenIdConnectIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -1224,31 +1180,30 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
 
       oprot.writeStructBegin(STRUCT_DESC);
       if (struct.userModelVersion != null) {
-        oprot.writeFieldBegin(USER_MODEL_VERSION_FIELD_DESC);
-        oprot.writeString(struct.userModelVersion);
-        oprot.writeFieldEnd();
+        if (struct.isSetUserModelVersion()) {
+          oprot.writeFieldBegin(USER_MODEL_VERSION_FIELD_DESC);
+          oprot.writeString(struct.userModelVersion);
+          oprot.writeFieldEnd();
+        }
       }
       if (struct.airavataInternalUserId != null) {
-        oprot.writeFieldBegin(AIRAVATA_INTERNAL_USER_ID_FIELD_DESC);
-        oprot.writeString(struct.airavataInternalUserId);
-        oprot.writeFieldEnd();
+        if (struct.isSetAiravataInternalUserId()) {
+          oprot.writeFieldBegin(AIRAVATA_INTERNAL_USER_ID_FIELD_DESC);
+          oprot.writeString(struct.airavataInternalUserId);
+          oprot.writeFieldEnd();
+        }
       }
       if (struct.email != null) {
-        oprot.writeFieldBegin(EMAIL_FIELD_DESC);
-        {
-          oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, struct.email.size()));
-          for (String _iter3 : struct.email)
-          {
-            oprot.writeString(_iter3);
-          }
-          oprot.writeListEnd();
+        if (struct.isSetEmail()) {
+          oprot.writeFieldBegin(EMAIL_FIELD_DESC);
+          oprot.writeString(struct.email);
+          oprot.writeFieldEnd();
         }
-        oprot.writeFieldEnd();
       }
-      if (struct.openIDConnect != null) {
-        if (struct.isSetOpenIDConnect()) {
-          oprot.writeFieldBegin(OPEN_IDCONNECT_FIELD_DESC);
-          oprot.writeString(struct.openIDConnect);
+      if (struct.openIdConnect != null) {
+        if (struct.isSetOpenIdConnect()) {
+          oprot.writeFieldBegin(OPEN_ID_CONNECT_FIELD_DESC);
+          oprot.writeString(struct.openIdConnect);
           oprot.writeFieldEnd();
         }
       }
@@ -1311,40 +1266,49 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     @Override
     public void write(org.apache.thrift.protocol.TProtocol prot, UserProfile struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
-      oprot.writeString(struct.userModelVersion);
-      oprot.writeString(struct.airavataInternalUserId);
-      {
-        oprot.writeI32(struct.email.size());
-        for (String _iter4 : struct.email)
-        {
-          oprot.writeString(_iter4);
-        }
-      }
       BitSet optionals = new BitSet();
-      if (struct.isSetOpenIDConnect()) {
+      if (struct.isSetUserModelVersion()) {
         optionals.set(0);
       }
-      if (struct.isSetSaml()) {
+      if (struct.isSetAiravataInternalUserId()) {
         optionals.set(1);
       }
-      if (struct.isSetOfficialName()) {
+      if (struct.isSetEmail()) {
         optionals.set(2);
       }
-      if (struct.isSetPreferredName()) {
+      if (struct.isSetOpenIdConnect()) {
         optionals.set(3);
       }
-      if (struct.isSetGivenName()) {
+      if (struct.isSetSaml()) {
         optionals.set(4);
       }
-      if (struct.isSetFamilyName()) {
+      if (struct.isSetOfficialName()) {
         optionals.set(5);
       }
-      if (struct.isSetDisplayName()) {
+      if (struct.isSetPreferredName()) {
         optionals.set(6);
       }
-      oprot.writeBitSet(optionals, 7);
-      if (struct.isSetOpenIDConnect()) {
-        oprot.writeString(struct.openIDConnect);
+      if (struct.isSetGivenName()) {
+        optionals.set(7);
+      }
+      if (struct.isSetFamilyName()) {
+        optionals.set(8);
+      }
+      if (struct.isSetDisplayName()) {
+        optionals.set(9);
+      }
+      oprot.writeBitSet(optionals, 10);
+      if (struct.isSetUserModelVersion()) {
+        oprot.writeString(struct.userModelVersion);
+      }
+      if (struct.isSetAiravataInternalUserId()) {
+        oprot.writeString(struct.airavataInternalUserId);
+      }
+      if (struct.isSetEmail()) {
+        oprot.writeString(struct.email);
+      }
+      if (struct.isSetOpenIdConnect()) {
+        oprot.writeString(struct.openIdConnect);
       }
       if (struct.isSetSaml()) {
         oprot.writeString(struct.saml);
@@ -1369,47 +1333,44 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, UserProfile struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      struct.userModelVersion = iprot.readString();
-      struct.setUserModelVersionIsSet(true);
-      struct.airavataInternalUserId = iprot.readString();
-      struct.setAiravataInternalUserIdIsSet(true);
-      {
-        org.apache.thrift.protocol.TList _list5 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRING, iprot.readI32());
-        struct.email = new ArrayList<String>(_list5.size);
-        String _elem6;
-        for (int _i7 = 0; _i7 < _list5.size; ++_i7)
-        {
-          _elem6 = iprot.readString();
-          struct.email.add(_elem6);
-        }
-      }
-      struct.setEmailIsSet(true);
-      BitSet incoming = iprot.readBitSet(7);
+      BitSet incoming = iprot.readBitSet(10);
       if (incoming.get(0)) {
-        struct.openIDConnect = iprot.readString();
-        struct.setOpenIDConnectIsSet(true);
+        struct.userModelVersion = iprot.readString();
+        struct.setUserModelVersionIsSet(true);
       }
       if (incoming.get(1)) {
+        struct.airavataInternalUserId = iprot.readString();
+        struct.setAiravataInternalUserIdIsSet(true);
+      }
+      if (incoming.get(2)) {
+        struct.email = iprot.readString();
+        struct.setEmailIsSet(true);
+      }
+      if (incoming.get(3)) {
+        struct.openIdConnect = iprot.readString();
+        struct.setOpenIdConnectIsSet(true);
+      }
+      if (incoming.get(4)) {
         struct.saml = iprot.readString();
         struct.setSamlIsSet(true);
       }
-      if (incoming.get(2)) {
+      if (incoming.get(5)) {
         struct.officialName = iprot.readString();
         struct.setOfficialNameIsSet(true);
       }
-      if (incoming.get(3)) {
+      if (incoming.get(6)) {
         struct.preferredName = iprot.readString();
         struct.setPreferredNameIsSet(true);
       }
-      if (incoming.get(4)) {
+      if (incoming.get(7)) {
         struct.givenName = iprot.readString();
         struct.setGivenNameIsSet(true);
       }
-      if (incoming.get(5)) {
+      if (incoming.get(8)) {
         struct.familyName = iprot.readString();
         struct.setFamilyNameIsSet(true);
       }
-      if (incoming.get(6)) {
+      if (incoming.get(9)) {
         struct.displayName = iprot.readString();
         struct.setDisplayNameIsSet(true);
       }

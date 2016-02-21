@@ -16,14 +16,18 @@ public class App
     public static void main( String[] args ) throws IOException {
         JSONObject publications, funding, institution, verified, hours;
 
+        //Great the instance to interact with the mongo interface
         MongoWrapper database = new MongoWrapper();
 
+        //Set up the user to be compiled with the metrics
         JSONObject user = new JSONObject();
         user.put("name", "Sameet Sapra");
         user.put("primaryEmail", "sameet.sapra@gmail.com");
-        
+
+        //Metrix object for collecting the funding information
         String fundingNumber = "1052893";
         FundingLookup fl = new FundingLookup(fundingNumber);
+
         try{
             JSONObject fundingJSON = fl.load();
         }

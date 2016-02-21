@@ -21,7 +21,7 @@ import org.json.simple.JSONValue;
  * and returns parsed data into strings and a JSON object. 
  * @author Peter Dirks
  */
-public class FundingLookup implements Runnable, Metric {
+public class FundingLookup implements Runnable {
     String fundingID;
     Thread runner;
     

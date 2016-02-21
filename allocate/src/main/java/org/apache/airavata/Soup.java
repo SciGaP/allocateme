@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by ssapra on 2/20/16.
  */
-public class Soup {
+public class Soup implements Metric{
     private String url;
     private String professorName;
     private int page;

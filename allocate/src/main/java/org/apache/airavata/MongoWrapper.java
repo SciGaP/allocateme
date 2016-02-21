@@ -16,6 +16,7 @@ import org.json.simple.JSONValue;
  */
 public class MongoWrapper {
 
+
 	private MongoDatabase db;
 	private int results;
 
@@ -24,12 +25,21 @@ public class MongoWrapper {
 		db = mongoClient.getDatabase("resource_allocation");
 	}
 
+	/**
+	 * Checks weather a user already exists in the database
+	 * @param user Json object with the user data to check against
+	 * @return boolean value for if the user is there or not
+     */
 	public boolean userInDB(JSONObject user) {
 		FindIterable<Document> iterator = db.getCollection("user")
 				.find(new Document("user.primaryEmail", user.get("primaryEmail")));
 		return iterator.iterator().hasNext();
 	}
 
+	/**
+	 * Creates a new user in the database
+	 * @param user Json object with the user data to store
+     */
 	public void createUser(JSONObject user) {
 		BasicDBObject documentUser = new BasicDBObject();
 		db.getCollection("user").insertOne(new Document("user",
@@ -37,9 +47,9 @@ public class MongoWrapper {
 	}
 
 	/**
-     * Take a string formatted representation of the data and add it to the database
+	 * Add a json object directly to the database
+	 * @param user Json object with the user data
      */
-	
     public void addJSONtoDB(JSONObject user){
     	System.out.println(user.toJSONString());
     	System.out.println("adding");
@@ -60,10 +70,10 @@ public class MongoWrapper {
        }
 
 	/**
-	 * @param primaryEmail
-	 *            The user's primary email address to query the database.
-	 *            Returns a JSONObject containing all of the user's data
-	 */
+	 * Get the user from the email address
+	 * @param primaryEmail the primary email of the user to query against
+	 * @return a Json object with the user's data
+     */
 	public JSONObject getUser(String primaryEmail) {
 		FindIterable<Document> iterator = db.getCollection("user")
 				.find(new Document("user.primaryEmail", primaryEmail));

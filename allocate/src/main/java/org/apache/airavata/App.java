@@ -29,7 +29,7 @@ public class App
         user.put("verified", validator.validateEmail(email));
         
         database.addJSONtoDB(user);
-        
+
         // Get user's name / email
 
         // Check if user is already in database

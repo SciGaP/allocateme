@@ -152,7 +152,7 @@ public class FundingLookup implements Runnable {
         // json objects into a array-like data structure.
         JSONArray docs; 
         try {
-            docs = (JSONArray)jsonObj.get("docs");  // change this to "award"?
+            docs = (JSONArray)jsonObj.get("award");
         } catch (Exception ex) {
             throw ex;
         }

@@ -80,7 +80,7 @@ public class App
         String name = userProfile.getName();
         String email = userProfile.getEmail();
         long tier = userProfile.getTier();
-
+        String fundingID = userProfile.getFundingID();
         DBWrapper database = new DBWrapper();
         Email validator = new Email(email);
 

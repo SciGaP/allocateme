@@ -74,6 +74,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   private static final org.apache.thrift.protocol.TField PUBLICATIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("publications", org.apache.thrift.protocol.TType.LIST, (short)6);
   private static final org.apache.thrift.protocol.TField FUNDING_FIELD_DESC = new org.apache.thrift.protocol.TField("funding", org.apache.thrift.protocol.TType.LIST, (short)7);
   private static final org.apache.thrift.protocol.TField INSTITUTION_FIELD_DESC = new org.apache.thrift.protocol.TField("institution", org.apache.thrift.protocol.TType.STRUCT, (short)8);
+  private static final org.apache.thrift.protocol.TField FUNDING_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("fundingID", org.apache.thrift.protocol.TType.STRING, (short)9);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -89,6 +90,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   private List<Publication> publications; // optional
   private List<Award> funding; // optional
   private Institution institution; // optional
+  private String fundingID; // optional
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -99,7 +101,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     TIER((short)5, "tier"),
     PUBLICATIONS((short)6, "publications"),
     FUNDING((short)7, "funding"),
-    INSTITUTION((short)8, "institution");
+    INSTITUTION((short)8, "institution"),
+    FUNDING_ID((short)9, "fundingID");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -130,6 +133,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
           return FUNDING;
         case 8: // INSTITUTION
           return INSTITUTION;
+        case 9: // FUNDING_ID
+          return FUNDING_ID;
         default:
           return null;
       }
@@ -172,7 +177,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
   // isset id assignments
   private static final int __TIER_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
-  private static final _Fields optionals[] = {_Fields.USER_MODEL_VERSION,_Fields.AIRAVATA_INTERNAL_USER_ID,_Fields.EMAIL,_Fields.NAME,_Fields.TIER,_Fields.PUBLICATIONS,_Fields.FUNDING,_Fields.INSTITUTION};
+  private static final _Fields optionals[] = {_Fields.USER_MODEL_VERSION,_Fields.AIRAVATA_INTERNAL_USER_ID,_Fields.EMAIL,_Fields.NAME,_Fields.TIER,_Fields.PUBLICATIONS,_Fields.FUNDING,_Fields.INSTITUTION,_Fields.FUNDING_ID};
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
@@ -194,6 +199,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Award.class))));
     tmpMap.put(_Fields.INSTITUTION, new org.apache.thrift.meta_data.FieldMetaData("institution", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Institution.class)));
+    tmpMap.put(_Fields.FUNDING_ID, new org.apache.thrift.meta_data.FieldMetaData("fundingID", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(UserProfile.class, metaDataMap);
   }
@@ -240,6 +247,9 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     if (other.isSetInstitution()) {
       this.institution = new Institution(other.institution);
     }
+    if (other.isSetFundingID()) {
+      this.fundingID = other.fundingID;
+    }
   }
 
   public UserProfile deepCopy() {
@@ -259,6 +269,7 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     this.publications = null;
     this.funding = null;
     this.institution = null;
+    this.fundingID = null;
   }
 
   public String getUserModelVersion() {
@@ -474,6 +485,29 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     }
   }
 
+  public String getFundingID() {
+    return this.fundingID;
+  }
+
+  public void setFundingID(String fundingID) {
+    this.fundingID = fundingID;
+  }
+
+  public void unsetFundingID() {
+    this.fundingID = null;
+  }
+
+  /** Returns true if field fundingID is set (has been assigned a value) and false otherwise */
+  public boolean isSetFundingID() {
+    return this.fundingID != null;
+  }
+
+  public void setFundingIDIsSet(boolean value) {
+    if (!value) {
+      this.fundingID = null;
+    }
+  }
+
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case USER_MODEL_VERSION:
@@ -540,6 +574,14 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       }
       break;
 
+    case FUNDING_ID:
+      if (value == null) {
+        unsetFundingID();
+      } else {
+        setFundingID((String)value);
+      }
+      break;
+
     }
   }
 
@@ -569,6 +611,9 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     case INSTITUTION:
       return getInstitution();
 
+    case FUNDING_ID:
+      return getFundingID();
+
     }
     throw new IllegalStateException();
   }
@@ -596,6 +641,8 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       return isSetFunding();
     case INSTITUTION:
       return isSetInstitution();
+    case FUNDING_ID:
+      return isSetFundingID();
     }
     throw new IllegalStateException();
   }
@@ -685,6 +732,15 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         return false;
     }
 
+    boolean this_present_fundingID = true && this.isSetFundingID();
+    boolean that_present_fundingID = true && that.isSetFundingID();
+    if (this_present_fundingID || that_present_fundingID) {
+      if (!(this_present_fundingID && that_present_fundingID))
+        return false;
+      if (!this.fundingID.equals(that.fundingID))
+        return false;
+    }
+
     return true;
   }
 
@@ -731,6 +787,11 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     list.add(present_institution);
     if (present_institution)
       list.add(institution);
+
+    boolean present_fundingID = true && (isSetFundingID());
+    list.add(present_fundingID);
+    if (present_fundingID)
+      list.add(fundingID);
 
     return list.hashCode();
   }
@@ -819,6 +880,16 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
     }
     if (isSetInstitution()) {
       lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.institution, other.institution);
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+    }
+    lastComparison = Boolean.valueOf(isSetFundingID()).compareTo(other.isSetFundingID());
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+    if (isSetFundingID()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fundingID, other.fundingID);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -915,6 +986,16 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         sb.append("null");
       } else {
         sb.append(this.institution);
+      }
+      first = false;
+    }
+    if (isSetFundingID()) {
+      if (!first) sb.append(", ");
+      sb.append("fundingID:");
+      if (this.fundingID == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.fundingID);
       }
       first = false;
     }
@@ -1053,6 +1134,14 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
+          case 9: // FUNDING_ID
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.fundingID = iprot.readString();
+              struct.setFundingIDIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -1134,6 +1223,13 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
           oprot.writeFieldEnd();
         }
       }
+      if (struct.fundingID != null) {
+        if (struct.isSetFundingID()) {
+          oprot.writeFieldBegin(FUNDING_ID_FIELD_DESC);
+          oprot.writeString(struct.fundingID);
+          oprot.writeFieldEnd();
+        }
+      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -1176,7 +1272,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       if (struct.isSetInstitution()) {
         optionals.set(7);
       }
-      oprot.writeBitSet(optionals, 8);
+      if (struct.isSetFundingID()) {
+        optionals.set(8);
+      }
+      oprot.writeBitSet(optionals, 9);
       if (struct.isSetUserModelVersion()) {
         oprot.writeString(struct.userModelVersion);
       }
@@ -1213,12 +1312,15 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
       if (struct.isSetInstitution()) {
         struct.institution.write(oprot);
       }
+      if (struct.isSetFundingID()) {
+        oprot.writeString(struct.fundingID);
+      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, UserProfile struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(8);
+      BitSet incoming = iprot.readBitSet(9);
       if (incoming.get(0)) {
         struct.userModelVersion = iprot.readString();
         struct.setUserModelVersionIsSet(true);
@@ -1271,6 +1373,10 @@ public class UserProfile implements org.apache.thrift.TBase<UserProfile, UserPro
         struct.institution = new Institution();
         struct.institution.read(iprot);
         struct.setInstitutionIsSet(true);
+      }
+      if (incoming.get(8)) {
+        struct.fundingID = iprot.readString();
+        struct.setFundingIDIsSet(true);
       }
     }
   }

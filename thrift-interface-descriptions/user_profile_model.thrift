@@ -86,5 +86,6 @@ struct UserProfile {
     5: optional i64 tier,
     6: optional list<Publication> publications,
     7: optional list<Award> funding,
-    8: optional Institution institution
+    8: optional Institution institution,
+    9: optional string fundingID
 }

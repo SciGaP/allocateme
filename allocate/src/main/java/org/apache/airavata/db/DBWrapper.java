@@ -59,7 +59,7 @@ public class DBWrapper {
 		Document extractUser = new Document("user.primaryEmail", user.get("primaryEmail"));
 		Document query2 = new Document();
 
-		query2.append("$set", new Document().append("publications", (JSONArray) user.get("publications")).append("institution", new Document("verified", user.get("verified")))
+		query2.append("$set", new Document().append("publications", user.get("publications")).append("institution", new Document("verified", user.get("verified")))
 				.append("tier", user.get("tier")).append("funding", user.get("funding")));
 		db.getCollection("user").updateMany(extractUser, query2);
 		System.out.println("adding done");

@@ -20,7 +20,7 @@ public class App
         String fundingNumber = "1052893";
         int tier = 3;
         
-    	JSONObject user = new JSONObject();
+    	  JSONObject user = new JSONObject();
         MongoWrapper database = new MongoWrapper();
         Email validator = new Email(email);
 

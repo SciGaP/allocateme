@@ -42,6 +42,16 @@ enum Status {
     EXPIRED
 }
 
+struct Publication {
+    1: optional string numCitations,
+    2: optional string name
+}
+
+struct Institution {
+    1: optional bool verified
+}
+
+
 /**
  * A structure holding the user profile and its child models.
  *
@@ -58,11 +68,10 @@ struct UserProfile {
     1: optional string userModelVersion = USER_PROFILE_VERSION,
     2: optional string airavataInternalUserId = "DO_NOT_ADD_AT_CLIENT",
     3: optional string email,
-    4: optional string openIdConnect,
-    5: optional string saml,
-    6: optional string officialName,
-    7: optional string preferredName,
-    8: optional string givenName,
-    9: optional string familyName,
-    10: optional string displayName
+    4: optional string name,
+    5: optional string tier,
+    6: optional string verified,
+    7: optional list<Publication> publications,
+    8: optional list<string> funding,
+    9: optional Institution institution
 }

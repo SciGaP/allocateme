@@ -41,17 +41,22 @@ public class MongoWrapper {
      */
 	
     public void addJSONtoDB(JSONObject user){
-//    	db.getCollection("user").insertOne(Document.parse(user.toJSONString()));
-    	Document query1 = new Document();
+    	System.out.println(user.toJSONString());
+    	System.out.println("adding");
+    	
+    	Document extractUser = new Document("user.primaryEmail", user.get("primaryEmail"));
     	Document query2 = new Document();
     	
-    	query1.append("user",new Document().append("primaryEmail", user.get("primaryEmail")));
+//    	query2.append("$set", new Document()
+//				.append("tier", user.get("tier")));
     	
-    	query2.append("$set", new Document().append("publications", (JSONArray) user.get("publications"))
-											.append("institution", new Document("verified",user.get("verified")))
+//    	.append("publications", (JSONArray) user.get("publications"))
+    	query2.append("$set", new Document()
+											.append("institution", new Document("verified", user.get("verified")))
 											.append("tier",user.get("tier"))
 											.append("funding", user.get("funding")));
-    	db.getCollection("user").updateOne(query1, query2);
+    	db.getCollection("user").updateMany(extractUser, query2);
+    	System.out.println("adding done");
        }
 
 	/**

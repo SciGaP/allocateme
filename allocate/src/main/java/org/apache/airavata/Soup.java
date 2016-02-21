@@ -32,7 +32,6 @@ public class Soup {
         String pagedUrl = this.url;
         System.out.println(pagedUrl);
         Document doc = Jsoup.connect(pagedUrl)
-                .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1")
                 .referrer("http://www.google.com")
                 .timeout(12000)
                 .get();

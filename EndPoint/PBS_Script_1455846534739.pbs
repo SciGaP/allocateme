@@ -1,0 +1,12 @@
+#!/bin/bash
+#PBS -l  nodes=1:ppn=1,walltime=10:00
+#PBS -N testapp
+#PBS -m abe
+#PBS -M anujbhan@iu.edu
+#PBS -e /N/u/anujbhan/Karst/PBS_Script_1455846534739.pbs.err
+#PBS -o /N/u/anujbhan/Karst/PBS_Script_1455846534739.pbs.log
+cd /N/u/anujbhan/Karst/
+chmod 777 /N/u/anujbhan/Karst/
+./a.c.out
+echo "The log files are attached"|mailx -r Zenith -s"Karst execution results" -a /N/u/anujbhan/Karst/PBS_Script_1455846534739.pbs.err -a /N/u/anujbhan/Karst/PBS_Script_1455846534739.pbs.log "anujbhan@iu.edu"
+echo "The log files are attached"|mailx -r Zenith -s"Karst execution results" -a /N/u/anujbhan/Karst/PBS_Script_1455846534739.pbs.err -a /N/u/anujbhan/Karst/PBS_Script_1455846534739.pbs.log "anujbhan@iu.edu"

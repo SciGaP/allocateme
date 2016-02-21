@@ -1,0 +1,21 @@
+Milestone 2 submission
+As part of this milestone submission, we have developed the following three REST APIs:
+
+- /upload : This accepts user and job details and submits a job to Karst
+	   The user would have to upload the private key that would be used to verify the identity to Karst
+- /monitor: This requests user credentials and job details and provides the latest status of the input job.
+- /cancel:  This requests user credentials and job details and cancels the job.
+
+Installation instructions:
+
+There are two ways in which the project can be run.
+
+1. Checkout the KarstShell folder into Eclipse and install the SpringToolSuite plugin for eclipse. Then deploy the project as a SpringBoot application
+   and the application would be accessible at http://localhost:8080/ 
+   Please note that the context root is /
+
+2. Use mvn package to package the project to a war file and copy the file to the webapps folder of your tomcat installation. Reboot the server and navigate 
+   to the localhost URL.
+
+
+The index page provides navigation to the forms specific to each of the APIs which can be used to invoke the APIs.

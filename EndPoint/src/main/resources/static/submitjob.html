@@ -1,0 +1,33 @@
+<html>
+<body>
+<h1> <center>Karst Job Submission Shell</center></h1>
+<h2><center>Team Zenith</center></h2><br />
+<h2><center>Submit Job</center></h2><br />
+
+
+	<form method="POST" enctype="multipart/form-data"
+		action="/upload">
+<h3> User configuration parameters</h3>		
+	 Enter the username:<input type="text" name="user"><br /> 
+	 Enter the passphrase(if any):<input type="password" name="pass"><br /> 
+	 
+	 Enter the email ID:<input type="text" name="emailId"><br />
+	 Upload private key :
+	<input type="file" name="ppk"><br /> 	 	 
+		
+<h3> Job configuration parameters</h3>
+     Job file <input type="file" name="file"><br /> 
+ 	Compilation Required?<br />
+ 	<input type="radio" name="isCompile" value="Yes" checked>Yes<br>
+  	<input type="radio" name="isCompile" value="no">No<br>
+ 
+ 	 Enter the job name:<input type="text" name="jobName"><br /> 
+	 Enter the number of nodes:<input type="text" name="nodes" value="1"><br /> 
+	 Enter the number of ppn:<input type="text" name="ppn" value="1"><br /> 
+	 Enter the walltime: <input type="text" name="walltime" value="10:00"><br /> 
+	 Enter the target path: <input type="text" name="tpath"><br /> 
+	 <input type="submit"
+			value="Submit job"> 
+	</form>
+</body>
+</html>

@@ -1,0 +1,11 @@
+#!/bin/bash
+#PBS -l  nodes=1:ppn=1,walltime=10:00
+#PBS -N NoCompile
+#PBS -m abe
+#PBS -M atumohan@iu.edu
+#PBS -e /N/dc2/scratch/atumohan/PBS_Script_1455238318051.pbs.err
+#PBS -o /N/dc2/scratch/atumohan/PBS_Script_1455238318051.pbs.log
+cd /N/dc2/scratch/atumohan/
+chmod 777 /N/dc2/scratch/atumohan/
+./a.out
+echo "The log files are attached"|mailx -r Zenith -s"Karst execution results" -a /N/dc2/scratch/atumohan/PBS_Script_1455238318051.pbs.err -a /N/dc2/scratch/atumohan/PBS_Script_1455238318051.pbs.log "atumohan@iu.edu"

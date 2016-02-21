@@ -68,6 +68,7 @@
             <modules>
                 <module>user-profile-model</module>
                 <module>user-profile-cpi-stubs</module>
+                <module>user-profile-cpi-server</module>
                 <module>allocate</module>
             </modules>
         </profile>

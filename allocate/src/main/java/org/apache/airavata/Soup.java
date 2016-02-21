@@ -34,7 +34,6 @@ public class Soup {
 	public JSONArray getCitations() throws IOException {
 		String pagedUrl = this.url;
 		System.out.println(pagedUrl);
-//		/String[] tagsToDelete = { "[HTML]", "[PDF]","[BOOK]","[B]","[CITATION]","[C]" };
 		Document doc = Jsoup.connect(pagedUrl).timeout(5000).ignoreHttpErrors(true).followRedirects(true)
 				.userAgent("Mozilla").get();
 

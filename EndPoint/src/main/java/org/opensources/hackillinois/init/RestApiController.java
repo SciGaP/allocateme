@@ -33,25 +33,10 @@ public class RestApiController {
 	}
 
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public @ResponseBody String handleFileUpload(@RequestParam("tpath") String tPath,
-			@RequestParam("user") String userName,
-			@RequestParam("jobName") String jobName, @RequestParam("nodes") String nodes,
-			@RequestParam("ppn") String ppn, @RequestParam("walltime") String wallTime, 
-			@RequestParam("isCompile") String isComp, @RequestParam("emailId") String emailId, 
-			@RequestParam("ppk") MultipartFile ppk, @RequestParam(name = "pass", defaultValue = "null") String pass){
-
-		if (true) {
-			try {
-				//	return "Job submitted successfully with job Id "+jd.getJobId();
-				System.out.println( );
-				return "Demo Works";
-				
-			} catch (Exception e) {
-				return "You failed to upload " + e.getMessage();
-			}
-		} else {
-			return "failed because the file was empty.";
-		}
+	public @ResponseBody String handleFileUpload(			@RequestParam("username") String jobName, @RequestParam("size") String nodes,
+			@RequestParam("email") String email){
+		System.out.println("hello");
+		return "The company data (name: , employees: "+ jobName + ", headoffice: " + email + ") is saved";
 	}
 
 	}
